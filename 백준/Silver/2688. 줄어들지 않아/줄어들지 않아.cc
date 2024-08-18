@@ -36,7 +36,7 @@ accumulate 함수는 초기값의 타입을 기준으로 연산하므로,
 
 int: 0
 long long: 0LL
-unsigned long long
+unsigned long long: 0ULL
 float: 0.0f
 double: 0.0
 char: '\0'

@@ -20,7 +20,7 @@ int main() {
 		else s1++;
 	}
 
-	for (int i = n - 2; i >= 0; i--) {
+	for (int i = n - 1; i >= 0; i--) {
 		if (arr[i] % 2 == c) cnt2 += s2;
 		else s2++;
 	}

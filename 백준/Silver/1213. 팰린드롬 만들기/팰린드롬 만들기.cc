@@ -24,28 +24,18 @@ int main() {
 	}
 
 	string ans;
-	if (oddcnt == 0) {
+	if (oddcnt <= 1) {
 		for (int i = 0; i < 26; i++)
 			for (int j = 1; j <= arr[i] / 2; j++)
 				ans += i + 'A';
-
+        
+        if (oddcnt == 1) ans += tmp;
+        
 		for (int i = 25; i >= 0; i--)
 			for (int j = 1; j <= arr[i] / 2; j++)
 				ans += i + 'A';
 	}
-
-	else if (oddcnt == 1) {
-		for (int i = 0; i < 26; i++)
-			for (int j = 1; j <= arr[i] / 2; j++)
-				ans += i + 'A';
-
-		ans += tmp;
-
-		for (int i = 25; i >= 0; i--)
-			for (int j = 1; j <= arr[i] / 2; j++)
-				ans += i + 'A';
-	}
-
+    
 	else if (oddcnt > 1) ans = "I'm Sorry Hansoo";
 
 	cout << ans << '\n';

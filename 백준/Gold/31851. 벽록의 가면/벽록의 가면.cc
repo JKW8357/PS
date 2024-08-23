@@ -21,6 +21,8 @@ bool isconvex(pair<int, int> p1, pair<int, int> p2, pair<int, int> p3, pair<int,
 				if ((v[other1].X < v[i].X && v[other2].X < v[i].X) || (v[other1].X > v[i].X && v[other2].X > v[i].X)) convex++;
 			}
 
+			// 코드 블럭 명확히 묶어주어 의도치 않은 문제(두 번째 if문과 else문이 연결되는 일) 없도록 주의
+
 			else {
 					double slope = (double)(v[i].Y - v[j].Y) / (v[i].X - v[j].X);
 					bool check1 = v[other1].Y > slope * (v[other1].X - v[i].X) + v[i].Y;

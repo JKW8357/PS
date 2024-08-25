@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int arr[10005];
+long long arr[10005];
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -16,8 +16,8 @@ int main() {
 	long long cnt = 0;
 	for (int i = 0; i < n - 2; i++) {
 		for (int j = i + 1; j < n - 1; j++) {
-			int* left = lower_bound(arr + j + 1, arr + n, -(arr[i] + arr[j]));
-			int* right = upper_bound(arr + j + 1, arr + n, -(arr[i] + arr[j]));
+			auto left = lower_bound(arr + j + 1, arr + n, -(arr[i] + arr[j])) - arr;
+			auto right = upper_bound(arr + j + 1, arr + n, -(arr[i] + arr[j])) - arr;
 			if (left != right)
 				cnt += right - left;
 		}

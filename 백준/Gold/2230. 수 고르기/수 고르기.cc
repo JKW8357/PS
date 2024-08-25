@@ -1,27 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<long long> v;
+int arr[100005];
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	long long n, m;
+	int n, m;
 	cin >> n >> m;
-	for (int i = 0; i < n; i++) {
-		long long num;
-		cin >> num;
-		v.push_back(num);
-	}
-	sort(v.begin(), v.end());
+	for (int i = 0; i < n; i++) cin >> arr[i];
+	sort(arr, arr + n);
 	
-	long long ans = LLONG_MAX;
-	for (int i = 0; i < n - 1; i++) {
-		auto it = lower_bound(v.begin() + i, v.end(), v[i] + m);
-		if (it != v.end()) {
-			ans = min(ans, *it - v[i]);
-		}
+	int ans = INT_MAX;
+	int st = 0, en = 0;
+	while (st < n) {
+		while (en < n && arr[en] - arr[st] < m) en++;
+		if (en == n) break;
+		ans = min(ans, arr[en] - arr[st++]);
 	}
 	
 	cout << ans << '\n';

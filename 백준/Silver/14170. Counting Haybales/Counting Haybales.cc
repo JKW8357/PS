@@ -17,7 +17,6 @@ int main() {
 	}
 
 	sort(v.begin(), v.end());
-	v.erase(unique(v.begin(), v.end()), v.end());
 
 	while (q--) {
 		int a, b;

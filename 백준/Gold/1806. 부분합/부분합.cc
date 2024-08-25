@@ -13,12 +13,12 @@ int main() {
 	
 	int ans = INT_MAX;
 	int st = 0, en = 0;
-	int sum = 0;
+	int sum = arr[0];
 	while (st < n) {
 		while (en < n && sum < s)
-			sum += arr[en++];
-		if (en == n && sum < s) break;
-		ans = min(ans, en - st);
+			sum += arr[++en];
+		if (en == n) break;
+		ans = min(ans, en - st + 1);
 		sum -= arr[st++];
 	}
 	

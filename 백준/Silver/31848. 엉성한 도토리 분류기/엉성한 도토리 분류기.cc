@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef pair<int, int> p;
 
-vector<p> holes;
+vector<pair<int, int>> holes;
 int acorns[100005];
 int min_holes[100005];
 
@@ -28,7 +27,7 @@ int main() {
 	cin >> q;
 	for (int i = 0; i < q; i++) {
 		cin >> acorns[i];
-		auto it = lower_bound(holes.begin(), holes.end(), acorns[i], [](p a, int b) { return a.first < b; }); // 명시적인 비교함수를 통해 이분 탐색 수행
+		auto it = lower_bound(holes.begin(), holes.end(), acorns[i], [](pair<int, int> a, int b) { return a.first < b; }); // 명시적인 비교함수를 통해 이분 탐색
 		int idx = it - holes.begin();
 		cout << min_holes[idx] << ' '; // 최소 구멍 번호를 미리 저장함으로써 O(1)에 최솟값 출력 가능
 	}

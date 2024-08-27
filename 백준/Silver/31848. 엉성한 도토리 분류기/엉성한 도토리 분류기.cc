@@ -22,7 +22,7 @@ int main() {
 	min_holes[n - 1] = holes[n - 1].second;
 	for (int i = n - 2; i >= 0; i--)
 		min_holes[i] = min(holes[i].second, min_holes[i + 1]);
-    	// 최소 구멍 번호를 미리 저장
+    // 최소 구멍 번호를 미리 저장
     
 	int q;
 	cin >> q;
@@ -33,7 +33,7 @@ int main() {
 		cout << min_holes[idx] << ' '; // 최소 구멍 번호를 미리 저장함으로써 O(1)에 최솟값 출력 가능
 	}
     
-    	// 시간복잡도: O(Q * logN)
+    // 시간복잡도: O(Q * logN)
 
 	return 0;
 }

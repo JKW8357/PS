@@ -33,3 +33,7 @@ int main() {
 
 	return 0;
 }
+
+/*
+자료형 long long으로 수정 시 priority_queue의 자료형 또한 long long으로 수정해야 함
+*/

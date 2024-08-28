@@ -25,3 +25,5 @@ int main() {
 	cout << pq.top() << '\n';
 	return 0;
 }
+
+// 메모리 제한을 고려해 최대 크기가 n인 priority_queue를 이용해야 한다.

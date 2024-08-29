@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-deque<long long> dq;
+deque<int> dq;
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -11,7 +11,7 @@ int main() {
 	cin >> n >> k;
 
 	for (int i = 0; i < n; i++) {
-		long long num;
+		int num;
 		cin >> num;
 		dq.push_back(num);
 	}
@@ -23,7 +23,7 @@ int main() {
 
 	dq.pop_front();
 	sort(dq.begin(), dq.end());
-	cout << accumulate(dq.begin(), dq.begin() + (n - k), 0LL) << '\n';
+	cout << accumulate(dq.begin(), dq.begin() + (n - k), 0) << '\n';
 
 	return 0;
 }

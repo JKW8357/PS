@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+priority_queue<double, vector<double>, greater<>> pq;
+
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
@@ -8,16 +10,18 @@ int main() {
 	int n;
 	cin >> n;
 
-	vector<double> v;
 	for (int i = 0; i < n; i++) {
 		double num;
 		cin >> num;
-		v.push_back(num);
+		pq.push(num);
 	}
 
-	sort(v.begin(), v.end());
 	cout << fixed;
 	cout.precision(3);
-	for (int i = 0; i < 7; i++) cout << v[i] << '\n';
+	for (int i = 0; i < 7; i++) {
+		cout << pq.top() << '\n';
+		pq.pop();
+	}
+
 	return 0;
 }

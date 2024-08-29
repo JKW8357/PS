@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int ans[1000005];
-pair<int, int> tower[1000005];
+int ans[500005];
+pair<int, int> tower[500005];
 stack<pair<int, int>> st;
 
 int main() {

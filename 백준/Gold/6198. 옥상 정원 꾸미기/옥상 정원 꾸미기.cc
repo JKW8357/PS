@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long buildings[80005];
 stack<int> st;
 
 int main() {
@@ -13,10 +12,11 @@ int main() {
 
 	long long ans = 0;
 	for (int i = 1; i <= n; i++) {
-		cin >> buildings[i];
-		while (!st.empty() && st.top() <= buildings[i]) st.pop();
+		int height;
+		cin >> height;
+		while (!st.empty() && st.top() <= height) st.pop();
 		ans += st.size();
-		st.push(buildings[i]);
+		st.push(height);
 	}
 
 	cout << ans << ' ';

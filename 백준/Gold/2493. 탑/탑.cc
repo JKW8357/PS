@@ -2,7 +2,6 @@
 using namespace std;
 
 int ans[500005];
-pair<int, int> tower[500005];
 stack<pair<int, int>> st;
 
 int main() {
@@ -11,15 +10,13 @@ int main() {
 
 	int n;
 	cin >> n;
-	for (int i = 1; i <= n; i++) {
-		cin >> tower[i].first;
-		tower[i].second = i;
-	}
 
 	for (int i = 1; i <= n; i++) {
-		while (!st.empty() && st.top().first < tower[i].first) st.pop();
+		int height;
+		cin >> height;
+		while (!st.empty() && st.top().first < height) st.pop();
 		ans[i] = (!st.empty() ? st.top().second : 0);
-		st.push(tower[i]);
+		st.push({ height, i });
 	}
 
 	for (int i = 1; i <= n; i++) cout << ans[i] << ' ';

@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<string> vec;
-
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
@@ -11,6 +9,7 @@ int main() {
 	cin >> word;
 
 	int size = word.size();
+	string ans(size, 'z');
 	for (int i = 1; i < size - 1; i++) {
 		for (int j = 1; j < size - i; j++) {
 			string s1 = word.substr(0, i);
@@ -19,11 +18,15 @@ int main() {
 			reverse(s1.begin(), s1.end());
 			reverse(s2.begin(), s2.end());
 			reverse(s3.begin(), s3.end());
-			vec.push_back(s1 + s2 + s3);
+			ans = min(ans, s1 + s2 + s3);
 		}
 	}
 
-	sort(vec.begin(), vec.end());
-	cout << vec[0] << '\n';
+	cout << ans << '\n';
 	return 0;
 }
+
+/*
+string의 생성자를 통한 초기화 방법 사용
+min 함수를 통해 string의 사전순 대소 비교 수행
+*/

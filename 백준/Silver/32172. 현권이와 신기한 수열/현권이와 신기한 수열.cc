@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
 
 set<int> s = { 0 };
 
@@ -11,9 +10,9 @@ int main() {
 	int n;
 	cin >> n;
 
-	ll cur = 0;
+	int cur = 0;
 	for (int i = 1; i <= n; i++) {
-		ll tmp = cur - i;
+		int tmp = cur - i;
 		cur = ((tmp < 0 || s.count(tmp)) ? cur + i : tmp);
 		s.insert(cur);
 	}

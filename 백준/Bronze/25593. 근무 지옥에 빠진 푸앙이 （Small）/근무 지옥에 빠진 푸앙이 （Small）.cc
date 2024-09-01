@@ -25,7 +25,8 @@ int main() {
 	int mintime = INT_MAX;
 	int maxtime = INT_MIN;
 
-	// map을 vector로 복사하지 않고 map을 순회하며 최댓값/최솟값 구하기
+	// unordered_map을 vector로 복사하지 않고 직접 순회하며 최댓값과 최솟값을 구함
+	// 이를 통해 불필요한 메모리 사용과 복사 시간을 줄일 수 있음
 	for (auto it = um.begin(); it != um.end(); it++) {
 		mintime = min(mintime, it->second);
 		maxtime = max(maxtime, it->second);

@@ -3,15 +3,27 @@ using namespace std;
 #define X first
 #define Y second
 
-unordered_map<char, pair<int, int>> dir;
+int n;
+string cmd;
 char board[11][11];
+unordered_map<char, pair<int, int>> dir;
+
+void draw(int idx, int x, int y) {
+    if (cmd[idx] == 'L' || cmd[idx] == 'R') {
+        if (board[x][y] == '|') board[x][y] = '+';
+        if (board[x][y] != '+' || board[x][y] == '.') board[x][y] = '-';
+    }
+
+    if (cmd[idx] == 'U' || cmd[idx] == 'D') {
+        if (board[x][y] == '-') board[x][y] = '+';
+        if (board[x][y] != '+' || board[x][y] == '.') board[x][y] = '|';
+    }
+}
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n;
-    string cmd;
     cin >> n >> cmd;
 
     dir['U'] = { -1, 0 };
@@ -29,25 +41,8 @@ int main() {
         int ny = cur.Y + dir[cmd[i]].Y;
         if (nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
 
-        if (cmd[i] == 'L' || cmd[i] == 'R') {
-            if (board[cur.X][cur.Y] == '|') board[cur.X][cur.Y] = '+';
-            if (board[cur.X][cur.Y] != '+' || board[cur.X][cur.Y] == '.') board[cur.X][cur.Y] = '-';
-        }
-
-        if (cmd[i] == 'U' || cmd[i] == 'D') {
-            if (board[cur.X][cur.Y] == '-') board[cur.X][cur.Y] = '+';
-            if (board[cur.X][cur.Y] != '+' || board[cur.X][cur.Y] == '.') board[cur.X][cur.Y] = '|';
-        }
-
-        if (cmd[i] == 'L' || cmd[i] == 'R') {
-            if (board[nx][ny] == '|') board[nx][ny] = '+';
-            if (board[nx][ny] != '+' || board[nx][ny] == '.') board[nx][ny] = '-';
-        }
-
-        if (cmd[i] == 'U' || cmd[i] == 'D') {
-            if (board[nx][ny] == '-') board[nx][ny] = '+';
-            if(board[nx][ny] != '+' || board[nx][ny] == '.') board[nx][ny] = '|';
-        }
+        draw(i, cur.X, cur.Y);
+        draw(i, nx, ny);
 
         cur = { nx, ny };
     }

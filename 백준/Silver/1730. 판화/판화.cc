@@ -8,16 +8,9 @@ string cmd;
 char board[11][11];
 unordered_map<char, pair<int, int>> dir;
 
-void draw(int idx, int x, int y) {
-    if (cmd[idx] == 'L' || cmd[idx] == 'R') {
-        if (board[x][y] == '|') board[x][y] = '+';
-        if (board[x][y] != '+' || board[x][y] == '.') board[x][y] = '-';
-    }
-
-    if (cmd[idx] == 'U' || cmd[idx] == 'D') {
-        if (board[x][y] == '-') board[x][y] = '+';
-        if (board[x][y] != '+' || board[x][y] == '.') board[x][y] = '|';
-    }
+void draw(int x, int y, char direction) {
+    if (board[x][y] == direction) board[x][y] = '+';
+    if (board[x][y] != '+' || board[x][y] == '.') board[x][y] = '|' + '-' - direction;
 }
 
 int main() {
@@ -41,8 +34,8 @@ int main() {
         int ny = cur.Y + dir[cmd[i]].Y;
         if (nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
 
-        draw(i, cur.X, cur.Y);
-        draw(i, nx, ny);
+        draw(cur.X, cur.Y, (cmd[i] == 'L' || cmd[i] == 'R') ? '|' : '-');
+        draw(nx, ny, (cmd[i] == 'L' || cmd[i] == 'R') ? '|' : '-');
 
         cur = { nx, ny };
     }

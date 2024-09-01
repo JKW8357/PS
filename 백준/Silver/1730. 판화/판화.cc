@@ -9,8 +9,8 @@ char board[11][11];
 unordered_map<char, pair<int, int>> dir;
 
 void draw(int x, int y, char direction) {
-    if (board[x][y] == direction) board[x][y] = '+';
-    if (board[x][y] != '+' || board[x][y] == '.') board[x][y] = '|' + '-' - direction;
+    if (board[x][y] == '.' || board[x][y] == direction) board[x][y] = direction;
+    else board[x][y] = '+';
 }
 
 int main() {
@@ -27,15 +27,14 @@ int main() {
     for (int i = 0; i < n; i++) fill(board[i], board[i] + n, '.');
 
     pair<int, int> cur = { 0, 0 };
-    int size = cmd.size();
 
-    for (int i = 0; i < size; i++) {
-        int nx = cur.X + dir[cmd[i]].X;
-        int ny = cur.Y + dir[cmd[i]].Y;
+    for (char c : cmd) {
+        int nx = cur.X + dir[c].X;
+        int ny = cur.Y + dir[c].Y;
         if (nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
 
-        draw(cur.X, cur.Y, (cmd[i] == 'L' || cmd[i] == 'R') ? '|' : '-');
-        draw(nx, ny, (cmd[i] == 'L' || cmd[i] == 'R') ? '|' : '-');
+        draw(cur.X, cur.Y, (c == 'L' || c == 'R') ? '-' : '|');
+        draw(nx, ny, (c == 'L' || c == 'R') ? '-' : '|');
 
         cur = { nx, ny };
     }

@@ -8,32 +8,26 @@ int main() {
 	string str;
 	cin >> str;
 
-	string max = "";
-	string min = "";
+	string max_str = "";
+	string min_str = "";
 	int cnt_m = 0;
 
 	for (int i = 0; i < str.size(); i++) {
 		if (str[i] == 'M') { 
-			if (cnt_m == 0) {
-				min += '1';
-				max += '1';
-			}
-			else if (cnt_m > 0) {
-				min += '0';
-				max += '1';
-			}
+			min_str += (cnt_m == 0) ? '1' : '0';
+			max_str += '1';
 			cnt_m++;
 		}
 
 		else {
-			min += '5';
-			max.erase(max.begin() + i - cnt_m, max.end());
-			max += '5';
-			for (int i = 0; i < cnt_m; i++) max += '0';
+			min_str += '5';
+			max_str.erase(max_str.end() - cnt_m, max_str.end());
+			max_str += '5';
+			for (int i = 0; i < cnt_m; i++) max_str += '0';
 			cnt_m = 0;
 		}
 	}
 
-	cout << max << '\n' << min << '\n';
+	cout << max_str << '\n' << min_str << '\n';
 	return 0;
 }

@@ -32,8 +32,6 @@ int main() {
 	return 0;
 }
 
-
-
 /*
 이분 탐색의 구현에서는 초기 lo와 hi를 설정할 때, 
 Check(lo)와 Check(hi)가 서로 다른 값을 가지도록 설정합니다. 

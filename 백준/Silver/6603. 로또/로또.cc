@@ -3,7 +3,6 @@ using namespace std;
 
 int k;
 int arr[15];
-bool visited[15];
 vector<int> vec;
 
 void solve(int idx, int depth) {
@@ -15,10 +14,8 @@ void solve(int idx, int depth) {
 
 	for (int i = idx; i < k; i++) {
 		vec.push_back(arr[i]);
-		visited[i] = true;
 		solve(i + 1, depth + 1);
 		vec.pop_back();
-		visited[i] = false;
 	}
 }
 

@@ -26,7 +26,6 @@ int main() {
 
 /*
 <algorithm> 헤더의 next_permutation, prev_permutation:
-vector, deque, list, string 등에서 iterator과 함께 사용 가능.
 다음 순열 또는 이전 순열로 재배열하고, 가능하면 true, 없으면 false를 반환.
 모든 순열을 탐색하려면:
 next_permutation: 사전순으로 가장 앞서는 순서로 초기화해야 함.

@@ -9,10 +9,9 @@ unordered_set<char> vowels = { 'a','e','i','o','u' };
 
 void solve(int num, int depth) {
 	if (depth == l) {
-		int v_cnt = 0, c_cnt = 0;
+		int v_cnt = 0;
 		for (char i : vec) if (vowels.count(i)) v_cnt++;
-		c_cnt = l - v_cnt;
-		if (v_cnt >= 1 && c_cnt >= 2) {
+		if (v_cnt >= 1 && l - v_cnt >= 2) {
 			for (char i : vec) cout << i;
 			cout << '\n';
 		}
@@ -20,13 +19,9 @@ void solve(int num, int depth) {
 	}
 
 	for (int i = num; i < c; i++) {
-		if (!visited[i]) {
-			vec.push_back(arr[i]);
-			visited[i] = true;
-			solve(i + 1, depth + 1);
-			vec.pop_back();
-			visited[i] = false;
-		}
+		vec.push_back(arr[i]);
+		solve(i + 1, depth + 1);
+		vec.pop_back();
 	}
 }
 

@@ -10,17 +10,14 @@ int main() {
 
 	int n;
 	cin >> n;
-	for (int i = 1; i <= n; i++) cin >> fruits[i];
+	for (int i = 0; i < n; i++) cin >> fruits[i];
 
-	int st = 1, en = 1, ans = 0;
-
-	while (en <= n) {
+	int st = 0, en = 0, ans = 0;
+	while (en < n) {
 		types[fruits[en]]++;
-		if (types.size() > 2) {
-			while (true)
-				if (--types[fruits[st++]] == 0) break;
-			types.erase(fruits[st - 1]);
-		}
+		while (types.size() > 2)
+			if (--types[fruits[st++]] == 0)
+				types.erase(fruits[st - 1]);
 		ans = max(ans, en++ - st + 1);
 	}
 

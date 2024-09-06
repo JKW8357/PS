@@ -28,8 +28,8 @@ int main() {
 			ranking[get<3>(vec[i])] = rank;
 		}
 		else {
-			ranking[get<3>(vec[i])] = i + 1;
-			rank++;
+			rank = i + 1;
+			ranking[get<3>(vec[i])] = rank;
 		}
 	}
 	cout << ranking[k] << '\n';

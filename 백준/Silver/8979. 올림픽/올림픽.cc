@@ -18,15 +18,20 @@ int main() {
 	}
 
 	sort(vec.begin(), vec.end(), greater<tuple<int, int, int, int>>());
-	int cnt = 1;
-	for (int i = 0; i < n - 1; i++) {
-		if (get<0>(vec[i]) == get<0>(vec[i + 1])
-			&& get<1>(vec[i]) == get<1>(vec[i + 1])
-			&& get<2>(vec[i]) == get<2>(vec[i + 1])) ranking[get<3>(vec[i])] = cnt;
-		else ranking[get<3>(vec[i])] = cnt++;
-	}
-	ranking[get<3>(vec[n - 1])] = cnt;
 
+	int rank = 1;
+	ranking[get<3>(vec[0])] = rank;
+	for (int i = 1; i < n; i++) {
+		if (get<0>(vec[i]) == get<0>(vec[i - 1])
+			&& get<1>(vec[i]) == get<1>(vec[i - 1])
+			&& get<2>(vec[i]) == get<2>(vec[i - 1])) {
+			ranking[get<3>(vec[i])] = rank;
+		}
+		else {
+			ranking[get<3>(vec[i])] = i + 1;
+			rank++;
+		}
+	}
 	cout << ranking[k] << '\n';
 	return 0;
 }

@@ -5,6 +5,9 @@ typedef long long ll;
 int k, n;
 int arr[10005];
 
+// 최적화 문제를 결정 문제로 전환
+// N개 이상의 랜선을 만들 수 있는 최대 길이는 얼마인가?
+// -> 랜선의 길이가 num일 때 N개 이상의 랜선을 만들 수 있는가?
 bool param(ll num) {
 	ll sum = 0;
 	for (int i = 0; i < k; i++) sum += arr[i] / num;

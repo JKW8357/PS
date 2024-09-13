@@ -13,10 +13,12 @@ int main() {
 
 	int b, c;
 	cin >> b >> c;
-	for (int i = 0; i < n; i++) rooms[i] = (rooms[i] - b > 0 ? rooms[i] - b : 0);
 
 	long long cnt = n;
-	for (int i = 0; i < n; i++) cnt += (rooms[i] - 1 + c) / c;
+	for (int i = 0; i < n; i++) {
+		rooms[i] -= b;
+		if (rooms[i] > 0) cnt += (rooms[i] - 1 + c) / c;
+	}
 
 	cout << cnt << '\n';
 	return 0;

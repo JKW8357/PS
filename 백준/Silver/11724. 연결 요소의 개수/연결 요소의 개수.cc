@@ -2,27 +2,21 @@
 using namespace std;
 
 int n, m;
-int ans = 0;
 
 vector<int> graph[1005];
 bool vis[1005];
 
-void bfs() {
-	for (int i = 1; i <= n; i++) {
-		if (vis[i]) continue;
-		ans++;
+void bfs(int v) {
+	queue<int> q;
+	q.push(v);
+	vis[v] = true;
 
-		queue<int> q;
-		q.push(i);
-		vis[i] = true;
-
-		while (!q.empty()) {
-			int cur = q.front(); q.pop();
-			for (int nxt : graph[cur]) {
-				if (vis[nxt]) continue;
-				q.push(nxt);
-				vis[nxt] = true;
-			}
+	while (!q.empty()) {
+		int cur = q.front(); q.pop();
+		for (int nxt : graph[cur]) {
+			if (vis[nxt]) continue;
+			q.push(nxt);
+			vis[nxt] = true;
 		}
 	}
 }
@@ -39,7 +33,12 @@ int main() {
 		graph[v].push_back(u);
 	}
 
-	bfs();
+    int ans = 0;
+	for (int i = 1; i <= n; i++) {
+		if (vis[i]) continue;
+		ans++; bfs(i);
+	}
+
 	cout << ans << '\n';
 	return 0;
 }

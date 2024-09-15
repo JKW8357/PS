@@ -1,9 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, m;
-int ans = INT_MAX;
-
 vector<int> graph[105];
 int dis[105];
 int arr[105];
@@ -31,6 +28,7 @@ int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 
+	int n, m;
 	cin >> n >> m;
 	while (m--) {
 		int u, v;
@@ -47,3 +45,8 @@ int main() {
 	cout << min_element(arr + 1, arr + n + 1) - arr << '\n';
 	return 0;
 }
+
+/*
+최단 경로 문제에서는 DFS 대신 BFS나 다른 최단 경로 알고리즘을 이용하는 것이 효율적이다.
+(DFS는 최단 경로를 보장하지 않는다.)
+*/

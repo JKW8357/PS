@@ -2,38 +2,43 @@
 using namespace std;
 
 bool vis[10005];
+string ans[10005];
 
 string bfs(int a, int b) {
-	queue<pair<int, string>> q;
-	q.push({ a, "" });
+	queue<int> q;
+	q.push(a);
 	vis[a] = true;
 
 	while (!q.empty()) {
-		auto cur = q.front(); q.pop();
-		if (cur.first == b) return cur.second;
+		int cur = q.front(); q.pop();
+		if (cur == b) return ans[cur];
 		
-		int nxtd = (cur.first * 2) % 10000;
+		int nxtd = (cur * 2) % 10000;
 		if (!vis[nxtd]) {
-			q.push({ nxtd, cur.second + "D" });
+			q.push(nxtd);
 			vis[nxtd] = true;
+			ans[nxtd] = ans[cur] + "D";
 		}
 
-		int nxts = (cur.first + 9999) % 10000;
+		int nxts = (cur + 9999) % 10000;
 		if (!vis[nxts]) {
-			q.push({ nxts, cur.second + "S" });
+			q.push(nxts);
 			vis[nxts] = true;
+			ans[nxts] = ans[cur] + "S";
 		}
 
-		int nxtl = (cur.first * 10 + cur.first / 1000) % 10000;
+		int nxtl = (cur * 10 + cur / 1000) % 10000;
 		if (!vis[nxtl]) {
-			q.push({ nxtl, cur.second + "L" });
+			q.push(nxtl);
 			vis[nxtl] = true;
+			ans[nxtl] = ans[cur] + "L";
 		}
 
-		int nxtr = cur.first / 10 + (cur.first % 10) * 1000;
+		int nxtr = cur / 10 + (cur % 10) * 1000;
 		if (!vis[nxtr]) {
-			q.push({ nxtr, cur.second + "R" });
+			q.push(nxtr);
 			vis[nxtr] = true;
+			ans[nxtr] = ans[cur] + "R";
 		}
 	}
 }
@@ -49,6 +54,7 @@ int main() {
 		int a, b;
 		cin >> a >> b;
 		fill(vis, vis + 10005, false);
+		fill(ans, ans + 10005, "");
 		cout << bfs(a, b) << '\n';
 	}
 	

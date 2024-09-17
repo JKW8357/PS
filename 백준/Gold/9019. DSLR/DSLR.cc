@@ -41,6 +41,8 @@ string bfs(int a, int b) {
 			ans[nxtr] = ans[cur] + "R";
 		}
 	}
+	
+	return ""; // 예외 처리 필수
 }
 
 int main() {

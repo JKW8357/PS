@@ -3,8 +3,8 @@ using namespace std;
 
 const int MX = 100000;
 int dis[100005];
-int track[100005];
-vector<int> path;
+int p[100005];
+vector<int> track;
 
 int bfs(int n, int k) {
 	queue<int> q;
@@ -16,7 +16,7 @@ int bfs(int n, int k) {
 		for (int nxt : {cur - 1, cur + 1, cur * 2}) {
 			if (nxt < 0 || nxt > MX || dis[nxt] != -1) continue;
 			dis[nxt] = dis[cur] + 1;
-			track[nxt] = cur;
+			p[nxt] = cur;
 			q.push(nxt);
 		}
 	}
@@ -31,19 +31,18 @@ int main() {
 	int n, k;
 	cin >> n >> k;
 	fill(dis, dis + MX + 1, -1);
-	fill(track, track + MX + 1, -1);
+	fill(p, p + MX + 1, -1);
 
 	int ans = bfs(n, k);
 	cout << ans << '\n';
 
 	int cur = k;
 	while (cur != -1) {
-		path.push_back(cur);
-		cur = track[cur];
+		track.push_back(cur);
+		cur = p[cur];
 	}
 	
-	reverse(path.begin(), path.end());
-	for (int v : path) cout << v << ' ';
-
+	reverse(track.begin(), track.end());
+	for (int v : track) cout << v << ' ';
 	return 0;
 }

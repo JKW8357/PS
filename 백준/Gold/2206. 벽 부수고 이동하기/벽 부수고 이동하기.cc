@@ -26,7 +26,7 @@ int bfs(int n, int m) {
 				dis[nx][ny][broken] = dis[curX][curY][broken] + 1;
 			}
 
-			else if (board[nx][ny] == '1' && broken == 0 && dis[nx][ny][broken] == -1) {
+			else if (board[nx][ny] == '1' && broken == 0 && dis[nx][ny][broken + 1] == -1) {
 				q.push({ nx, ny, broken + 1 });
 				dis[nx][ny][broken + 1] = dis[curX][curY][broken] + 1;
 			}

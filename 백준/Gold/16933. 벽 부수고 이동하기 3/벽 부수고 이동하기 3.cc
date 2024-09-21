@@ -32,6 +32,7 @@ int bfs(int n, int m, int k) {
 					q.push({ nx, ny, broken + 1 });
 					dis[nx][ny][broken + 1] = curD + 1;
 				}
+				
 				else {
 					q.push({ curX, curY, broken });
 					dis[curX][curY][broken] = curD + 1;

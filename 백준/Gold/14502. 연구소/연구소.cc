@@ -53,10 +53,8 @@ void solve() {
 
 	do {
 		preprocess();
-
 		for (int i = 0; i < isWall.size(); i++)
 			if (isWall[i]) outbreak[blanks[i].X][blanks[i].Y] = 1;
-
 		ans = max(ans, bfs());
 	} while (next_permutation(isWall.begin(), isWall.end()));
 }

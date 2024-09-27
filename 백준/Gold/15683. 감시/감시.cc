@@ -13,11 +13,12 @@ int dx[4] = { 1,0,-1,0 };
 int dy[4] = { 0,1,0,-1 };
 
 void monitor(int curX, int curY, int dir) {
-	int nx = curX + dx[dir];
-	int ny = curY + dy[dir];
-	if (nx < 0 || nx >= n || ny < 0 || ny >= m || board[nx][ny] == 6) return;
-	simulation[nx][ny] = 1;
-	monitor(nx, ny, dir);
+	while (true) {
+		curX += dx[dir];
+		curY += dy[dir];
+		if (curX < 0 || curX >= n || curY < 0 || curY >= m || board[curX][curY] == 6) return;
+		simulation[curX][curY] = 1;
+	}
 }
 
 void solve(int depth) {

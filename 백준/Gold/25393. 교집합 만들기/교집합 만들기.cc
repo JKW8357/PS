@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-map<int, int> maxright;
-map<int, int> minleft;
+unordered_map<int, int> maxright;
+unordered_map<int, int> minleft;
 set<pair<int, int>> s;
 
 int main() {

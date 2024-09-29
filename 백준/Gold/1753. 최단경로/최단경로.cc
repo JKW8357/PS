@@ -8,7 +8,7 @@ int v, e, st;
 vector<pii> adj[20005];
 int d[20005];
 
-void dijkstra(int st) {
+void dijkstra() {
 	priority_queue<pii, vector<pii>, greater<pii>> pq;
 	fill(d, d + v + 1, INT_MAX);
 	d[st] = 0;
@@ -37,7 +37,7 @@ int main() {
 		adj[u].push_back({ w,v });
 	}
 
-	dijkstra(st);
+	dijkstra();
 	for (int i = 1; i <= v; i++) {
 		if (d[i] == INT_MAX) cout << "INF\n";
 		else cout << d[i] << "\n";

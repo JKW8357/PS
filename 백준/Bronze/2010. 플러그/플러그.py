@@ -1,11 +1,12 @@
 import sys
-input = sys.stdin.readline
+input = sys.stdin.read
 print = sys.stdout.write
+data = input().split()
 
-n = int(input())
+n = int(data[0])
 sum = 1
-for _ in range(n):
-    num = int(input())
+for i in range(1, n + 1):
+    num = int(data[i])
     sum += num - 1
-
+    
 print(str(sum) + '\n')

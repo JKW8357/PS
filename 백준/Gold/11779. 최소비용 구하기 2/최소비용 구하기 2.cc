@@ -6,7 +6,7 @@ typedef pair<int, int> pii;
 
 int v, e, st, en;
 vector<pii> adj[1005];
-int dis[20005];
+int dis[1005];
 int pre[1005];
 
 void dijkstra() {

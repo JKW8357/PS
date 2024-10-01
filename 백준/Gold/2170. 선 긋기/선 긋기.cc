@@ -19,8 +19,8 @@ int main() {
 	sort(lines.begin(), lines.end());
 
 	int total = 0;
-	int st = lines[0].first;
-	int en = lines[0].second;
+	int st, en;
+	tie(st, en) = lines[0];
 
 	for (auto curLine : lines) {
 		if (curLine.first <= en) en = max(en, curLine.second);
@@ -30,8 +30,8 @@ int main() {
 			en = curLine.second;
 		}
 	}
-	total += en - st;
 
+	total += en - st;
 	cout << total << '\n';
 	return 0;
 }

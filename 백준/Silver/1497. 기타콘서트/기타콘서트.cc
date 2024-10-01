@@ -28,7 +28,6 @@ int main() {
 			if (playlist[j] == 'Y') guitars[i] |= (1LL << j);
 	}
 
-	// 비트마스크 백트래킹
 	for (int mask = 0; mask < (1 << n); mask++) {
 		ll state = 0;
 
@@ -39,13 +38,10 @@ int main() {
 		int songs = popCountll(state);
 		int guitarCount = popCountll(mask);
 
-		if (songs > maxSongCount) {
+		if (maxSongCount <= songs) {
+            minGuitarCount = (maxSongCount == songs ? min(minGuitarCount, guitarCount) : guitarCount);
 			maxSongCount = songs;
-			minGuitarCount = guitarCount;
 		}
-
-		else if (songs == maxSongCount)
-			minGuitarCount = min(minGuitarCount, guitarCount);
 	}
 
 	cout << (maxSongCount > 0 ? minGuitarCount : -1) << '\n';

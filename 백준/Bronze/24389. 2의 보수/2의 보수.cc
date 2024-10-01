@@ -2,9 +2,12 @@
 using namespace std;
 
 int popCount(int num) {
-	int res = 0;
-	for (int i = 0; i < 32; i++) res += (num >> i) & 1;
-	return res;
+    int count = 0;
+    while (num) {
+        num &= (num - 1);
+        count++;
+    }
+    return count;
 }
 
 int main() {

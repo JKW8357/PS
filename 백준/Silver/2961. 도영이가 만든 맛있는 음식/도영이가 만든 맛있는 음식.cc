@@ -5,15 +5,6 @@ int n;
 int ans = INT_MAX;
 vector<pair<int, int>> ingredients;
 
-int popCountll(int num) {
-	int count = 0;
-	while (num) {
-		num &= (num - 1);
-		count++;
-	}
-	return count;
-}
-
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);

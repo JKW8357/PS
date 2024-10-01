@@ -9,26 +9,12 @@ string name, playlist;
 ll guitars[10];
 
 int popCountll(ll num) {
-    int count = 0;
-    while (num) {
-        num &= (num - 1);
-        count++;
-    }
-    return count;
-}
-
-void solve(ll state, int guitarCount, int depth) {
-	if (depth == n) {
-		int songs = popCountll(state);
-		if (songs >= maxSongCount) {
-			maxSongCount = songs;
-			minGuitarCount = min(minGuitarCount, guitarCount);
-		}
-		return;
+	int count = 0;
+	while (num) {
+		num &= (num - 1);
+		count++;
 	}
-
-	solve(state | guitars[depth], guitarCount + 1, depth + 1);
-	solve(state, guitarCount, depth + 1);
+	return count;
 }
 
 int main() {
@@ -42,7 +28,26 @@ int main() {
 			if (playlist[j] == 'Y') guitars[i] |= (1LL << j);
 	}
 
-	solve(0, 0, 0);
-	cout << (minGuitarCount != 0 ? minGuitarCount : -1) << '\n';
+	// 비트마스크 백트래킹
+	for (int mask = 1; mask < (1 << n); mask++) {
+		ll state = 0;
+
+		for (int i = 0; i < n; i++)
+			if (mask & (1 << i))
+				state |= guitars[i];
+
+		int songs = popCountll(state);
+		int guitarCount = popCountll(mask);
+
+		if (songs > maxSongCount) {
+			maxSongCount = songs;
+			minGuitarCount = guitarCount;
+		}
+
+		else if (songs == maxSongCount)
+			minGuitarCount = min(minGuitarCount, guitarCount);
+	}
+
+	cout << (maxSongCount > 0 ? minGuitarCount : -1) << '\n';
 	return 0;
 }

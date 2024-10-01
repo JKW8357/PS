@@ -24,7 +24,7 @@ int main() {
 		else q.pop();
 
 		if (maxCount <= q.size()) {
-			lastNum = (q.size() == maxCount ? min(lastNum, q.back()) : q.back());
+			lastNum = (maxCount == q.size() ? min(lastNum, q.back()) : q.back());
 			maxCount = q.size();
 		}
 	}

@@ -15,9 +15,10 @@ int main() {
 	}
 
 	while (n != 0) {
-		int r = abs(n) % 2;
-		ans += to_string(r);
+		int r = n % (-2);
+		if (r < 0) r += 2;
 		n = (n - r) / (-2);
+		ans += to_string(r);
 	}
 
 	reverse(ans.begin(), ans.end());

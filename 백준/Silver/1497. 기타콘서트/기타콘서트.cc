@@ -29,7 +29,7 @@ int main() {
 	}
 
 	// 비트마스크 백트래킹
-	for (int mask = 1; mask < (1 << n); mask++) {
+	for (int mask = 0; mask < (1 << n); mask++) {
 		ll state = 0;
 
 		for (int i = 0; i < n; i++)

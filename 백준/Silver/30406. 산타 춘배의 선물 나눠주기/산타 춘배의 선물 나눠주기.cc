@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int ans = 0;
 int arr[4];
 
 int main() {
@@ -16,8 +17,6 @@ int main() {
 		arr[price]++;
 	}
 
-	int ans = 0;
-
 	int cnt1 = min(arr[0], arr[3]);
 	arr[0] -= cnt1;
 	arr[3] -= cnt1;
@@ -30,7 +29,7 @@ int main() {
 
 	for (int i = 0; i < 3; i++)
 		for (int j = i + 1; j < 4; j++)
-			if (arr[i] && arr[j]) ans += abs(i - j) * min(arr[i], arr[j]);
+			ans += abs(i - j) * min(arr[i], arr[j]);
 
 	cout << ans << '\n';
 	return 0;

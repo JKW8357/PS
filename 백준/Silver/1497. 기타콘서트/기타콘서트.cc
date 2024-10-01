@@ -9,9 +9,12 @@ string name, playlist;
 ll guitars[10];
 
 int popCountll(ll num) {
-	int res = 0;
-	for (int i = 0; i < m; i++) res += (num >> i) & 1;
-	return res;
+    int count = 0;
+    while (num) {
+        num &= (num - 1);
+        count++;
+    }
+    return count;
 }
 
 void solve(ll state, int guitarCount, int depth) {

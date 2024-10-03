@@ -5,48 +5,14 @@ int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	string str, number;
-	char cal;
-	long long num1, num2;
-	bool foundFirstNum = false;
-	bool firstNumNegative = false;
-	bool secondNumNegative = false;
+	long long num1, num2, ans;
+	char op;
+	cin >> oct >> num1 >> op >> oct >> num2;
 
-	cin >> str;
-	for (int i = 0; i < str.size(); i++) {
-		if (!foundFirstNum) {
-			if (i == 0 && str[i] == '-') {
-				firstNumNegative = true;
-				continue;
-			}
-
-			if (isdigit(str[i])) number += str[i];
-			else {
-				num1 = stoll(number, nullptr, 8);
-				if (firstNumNegative) num1 = -num1;
-				number.clear();
-				foundFirstNum = true;
-
-				cal = str[i];
-				if (str[i + 1] == '-') {
-					secondNumNegative = true;
-					i++;
-					continue;
-				}
-			}
-		}
-
-		else number += str[i];
-	}
-
-	num2 = stoll(number, nullptr, 8);
-	if (secondNumNegative) num2 = -num2;
-
-	long long ans;
-	if (cal == '+') ans = num1 + num2;
-	else if (cal == '-') ans = num1 - num2;
-	else if (cal == '*') ans = num1 * num2;
-	else if (cal == '/') {
+	if (op == '+') ans = num1 + num2;
+	else if (op == '-') ans = num1 - num2;
+	else if (op == '*') ans = num1 * num2;
+	else if (op == '/') {
 		if (num2 == 0) {
 			cout << "invalid\n";
 			return 0;
@@ -54,7 +20,12 @@ int main() {
 		else ans = floor(double(num1) / num2);
 	}
 
-	if (ans >= 0) cout << oct << ans << '\n';
-	else cout << '-' << oct << -ans << '\n';
+	if (ans < 0) cout << "-";
+	cout << oct << abs(ans);
 	return 0;
 }
+
+/*
+고정된 포맷의 입력을 처리할 때는 굳이 문자열을 통해 복잡하게 파싱할 필요가 없다.
+특히 숫자와 연산자를 직접 다루는 경우, C++의 입출력 조작자(cin, cout)를 활용하면 훨씬 더 간단하고 효율적으로 파싱할 수 있다.
+*/

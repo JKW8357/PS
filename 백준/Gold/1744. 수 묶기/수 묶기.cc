@@ -11,7 +11,6 @@ int main() {
 	int n;
 	cin >> n;
 
-	int ans = 0;
 	while (n--) {
 		int num;
 		cin >> num;
@@ -19,30 +18,29 @@ int main() {
 		else NegativePq.push(num);
 	}
 	
+	int ans = 0;
 	while (!PositivePq.empty()) {
 		int num1 = PositivePq.top();
 		PositivePq.pop();
-		int num2 = 1;
 		if (!PositivePq.empty()) {
-			num2 = PositivePq.top();
+			int num2 = PositivePq.top();
 			PositivePq.pop();
 			ans += max(num1 * num2, num1 + num2);
 		}
-		else ans += num1 * num2;
+		else ans += num1;
 	}
 
 	while (!NegativePq.empty()) {
 		int num1 = NegativePq.top();
 		NegativePq.pop();
-		int num2 = 1;
 		if (!NegativePq.empty()) {
-			num2 = NegativePq.top();
+			int num2 = NegativePq.top();
 			NegativePq.pop();
+			ans += num1 * num2;
 		}
-		ans += num1 * num2;
+		else ans += num1;
 	}
 
 	cout << ans << '\n';
-
 	return 0;
 }

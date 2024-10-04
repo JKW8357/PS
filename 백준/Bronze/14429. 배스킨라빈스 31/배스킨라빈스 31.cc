@@ -14,9 +14,10 @@ int main() {
 		int j, m;
 		cin >> j >> m;
 		int r = (j - 1) % (1 + m);
-		games[i] = (j - r) / (1 + m) + 1;
+		games[i] = (j - r - 1) / (1 + m) + 1;
 	}
 
-	cout << min_element(games + 1, games + n + 1) - games << ' ' << *min_element(games + 1, games + n + 1) * 2 << '\n';
+	auto it = min_element(games + 1, games + n + 1);
+	cout << it - games << ' ' << *it * 2 << '\n';
 	return 0;
 }

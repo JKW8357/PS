@@ -2,7 +2,7 @@
 using namespace std;
 
 int n, k;
-vector<int> order(100);
+vector<int> order;
 vector<int> multitap;
 
 int getEraseIdx(int cur) {
@@ -12,6 +12,7 @@ int getEraseIdx(int cur) {
 	for (int i = 0; i < multitap.size(); i++) {
 		auto it = find(order.begin() + cur + 1, order.begin() + k, multitap[i]);
 		if (it == order.end()) return i;
+
 		int idx = it - order.begin();
 		if (leastUsage < idx) {
 			leastUsage = idx;
@@ -27,6 +28,7 @@ int main() {
 	cin.tie(NULL);
 
 	cin >> n >> k;
+	order.resize(k);
 	for (int i = 0; i < k; i++) cin >> order[i];
 
 	int cnt = 0;

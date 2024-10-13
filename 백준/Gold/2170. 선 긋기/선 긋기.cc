@@ -26,8 +26,7 @@ int main() {
 		if (curLine.first <= en) en = max(en, curLine.second);
 		else {
 			total += en - st;
-			st = curLine.first;
-			en = curLine.second;
+			tie(st, en) = curLine;
 		}
 	}
 

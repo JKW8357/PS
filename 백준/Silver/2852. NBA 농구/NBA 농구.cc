@@ -1,40 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef pair<int, int> pii;
 
 int teamScore[3];
 string prevTime = "00:00";
 string winningTime[3] = { "00:00", "00:00", "00:00" };
 
-pii toTime(const string& str) {
+int toTime(const string& str) {
 	int MM = stoi(str.substr(0, 2));
 	int SS = stoi(str.substr(3, 2));
-	return { MM, SS };
+	return (MM * 60 + SS);
 }
 
-string toString(const pii& time) {
+string toString(int time) {
 	stringstream ss;
-	ss << setfill('0') << setw(2) << time.first << ':' << setfill('0') << setw(2) << time.second;
+	ss << setfill('0') << setw(2) << time / 60 << ':' << setfill('0') << setw(2) << time % 60;
 	return ss.str();
 }
 
-string addTime(const string& t1, const string& t2) {
-	pii time1 = toTime(t1);
-	pii time2 = toTime(t2);
-	int newMM = time2.first + time1.first;
-	int newSS = time2.second + time1.second;
-	if (newSS >= 60) { newMM += 1; newSS -= 60; }
-	return toString({ newMM, newSS });
-}
+string addTime(const string& t1, const string& t2) { return toString(toTime(t1) + toTime(t2)); }
 
-string subtractTime(const string& t1, const string& t2) {
-	pii from = toTime(t1);
-	pii to = toTime(t2);
-	int newMM = to.first - from.first;
-	int newSS = to.second - from.second;
-	if (newSS < 0) { newMM -= 1; newSS += 60; }
-	return toString({ newMM, newSS });
-}
+string subtractTime(const string& t1, const string& t2) { return toString(toTime(t2) - toTime(t1)); }
 
 int main() {
 	ios::sync_with_stdio(false);

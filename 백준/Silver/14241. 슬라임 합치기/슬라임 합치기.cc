@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-queue<int> q;
+int arr[105];
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -9,20 +9,12 @@ int main() {
 
 	int n;
 	cin >> n;
-
-	while (n--) {
-		int num;
-		cin >> num;
-		q.push(num);
-	}
+	for (int i = 0; i < n; i++) cin >> arr[i];
 
 	int score = 0;
-	while (q.size() > 1) {
-		int num1 = q.front(); q.pop();
-		int num2 = q.front(); q.pop();
-		score += num1 * num2;
-		q.push(num1 + num2);
-	}
+	for (int i = 0; i < n - 1; i++)
+		for (int j = i + 1; j < n; j++)
+			score += arr[i] * arr[j];
 	
 	cout << score << '\n';
 	return 0;

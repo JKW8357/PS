@@ -19,7 +19,7 @@ int main() {
     int size = binary.size();
     if (size % 3 != 0) octal += calc(0, size % 3, binary);
     for (int i = size % 3; i < binary.size(); i += 3) octal += calc(i, i + 3, binary);
-
     cout << octal << '\n';
+
     return 0;
 }

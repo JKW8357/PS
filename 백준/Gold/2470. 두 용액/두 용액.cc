@@ -14,7 +14,7 @@ int main() {
 	int l = 0, r = n - 1;
 	int minVal = INT_MAX;
 	int ans1, ans2;
-	while (l < r) {
+	while (minVal != 0 && l < r) {
 		int sum = arr[l] + arr[r];
 		if (minVal > abs(sum)) {
 			minVal = min(minVal, abs(sum));

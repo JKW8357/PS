@@ -14,8 +14,6 @@ int main() {
 	int cnt = 0;
 	for (int i = n - 1; i >= 0; i--) {
 		if (k == 0) break;
-		if (k < arr[i]) continue;
-		int moneyCnt = k / arr[i];
 		cnt += k / arr[i];
 		k %= arr[i];
 	}

@@ -1,19 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
-bool check(const string& P, const string& Q, const string& R, unordered_map<char, int>& um) {
+bool check(const string& P, const string& Q, const string& R, unordered_map<char, char>& um) {
 	int n = P.size();
-	string p = P;
-	string q = Q;
-	string r = R;
+	string p = P, q = Q, r = R;
 	for (int i = 0; i < n; i++) {
-		p[i] = um[P[i]] + '0';
-		q[i] = um[Q[i]] + '0';
-		r[i] = um[R[i]] + '0';
+		p[i] = um[P[i]];
+		q[i] = um[Q[i]];
+		r[i] = um[R[i]];
 	}
-	if (p < q && q < r) return true;
-	else return false;
+	return p < q && q < r;
 }
 
 int main() {
@@ -23,11 +19,10 @@ int main() {
 	int n;
 	string P, Q, R;
 	cin >> n >> P >> Q >> R;
-
-	vector<int> digits = { 1,2,3 };
+	vector<char> digits = { '1', '2', '3' };
 
 	do {
-		unordered_map<char, int> um;
+		unordered_map<char, char> um;
 		um['H'] = digits[0];
 		um['J'] = digits[1];
 		um['S'] = digits[2];

@@ -8,12 +8,9 @@ int main() {
 	int n; cin >> n;
 	int cnt = 0;
 	
-	for (int a = 1; a <= n / 3; a++) {
-		for (int b = a; b <= (n - a) / 2; b++) {
-			int c = n - a - b;
-			if (a + b > c) cnt++;
-		}
-	}
+	for (int a = (n + 1) / 2 - 1; a >= 1; a--)
+		for (int b = a; b >= (n - a + 1) / 2; b--)
+			cnt++;
 
 	cout << cnt << '\n';
 	return 0;

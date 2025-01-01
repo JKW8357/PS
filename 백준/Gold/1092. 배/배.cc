@@ -1,43 +1,35 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n, m;
-vector<int> cranes;
-vector<int> weights;
-
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	cin >> n; cranes.resize(n);
+	int n; cin >> n;
+	vector<int> cranes(n);
 	for (int i = 0; i < n; i++) cin >> cranes[i];
-	sort(cranes.begin(), cranes.end(), greater<int>());
+	sort(cranes.begin(), cranes.end());
 
-	cin >> m; weights.resize(m);
-	for (int i = 0; i < m; i++) cin >> weights[i];
-	sort(weights.begin(), weights.end(), greater<int>());
+	int m; cin >> m;
+	vector<int> boxes(m);
+	for (int i = 0; i < m; i++) cin >> boxes[i];
+	sort(boxes.begin(), boxes.end());
 
-	if (weights[0] > cranes[0]) {
+	if (cranes.back() < boxes.back()) {
 		cout << -1 << '\n';
 		return 0;
 	}
 
-	int times = 0;
-	while (!weights.empty()) {
-		int idx = 0;
+	vector<int> used(n);
+	for (int i = (int)boxes.size() - 1; i >= 0; --i) {
+		auto it = lower_bound(cranes.begin(), cranes.end(), boxes[i]);
+		if (it == cranes.end()) continue;
+		int init = it - cranes.begin();
 
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < weights.size(); j++) {
-				if (cranes[i] >= weights[j]) {
-					weights.erase(weights.begin() + j);
-					break;
-				}
-			}
-		}
-
-		times++;
+		int cand = min_element(used.begin() + init, used.end()) - used.begin();
+		used[cand]++;
 	}
 
-	cout << times << '\n';
+	cout << *max_element(used.begin(), used.end()) << '\n';
 	return 0;
 }

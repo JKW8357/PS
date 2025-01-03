@@ -7,26 +7,18 @@ int main() {
 
 	string a, b;
 	cin >> a >> b;
-	if (a.size() < b.size()) swap(a, b);
-	reverse(a.begin(), a.end());
-	reverse(b.begin(), b.end());
 	
 	int carry = 0;
 	string output;
 
-	for (int i = 0; i < (int)b.size(); i++) {
-		int tmp = (a[i] - '0') + (b[i] - '0') + carry;
-		output += tmp % 10 + '0';
-		carry = tmp / 10;
+	int i = a.size() - 1, j = b.size() - 1;
+	while (i >= 0 || j >= 0 || carry) {
+		int x = (i >= 0) ? (a[i--] - '0') : 0;
+		int y = (j >= 0) ? (b[j--] - '0') : 0;
+		int sum = x + y + carry;
+		output += sum % 10 + '0';
+		carry = sum / 10;
 	}
-
-	for (int i = (int)b.size(); i < (int)a.size(); i++) {
-		int tmp = (a[i] - '0') + carry;
-		output += tmp % 10 + '0';
-		carry = tmp / 10;
-	}
-
-	if (carry) output += carry + '0';
 
 	reverse(output.begin(), output.end());
 	cout << output << '\n';

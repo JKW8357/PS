@@ -2,7 +2,7 @@
 using namespace std;
 
 int n, m;
-vector<int> p(1000001, -1);
+vector<int> p;
 
 /*
 Path Compression을 통해 Find 연산 최적화
@@ -11,8 +11,8 @@ Path Compression을 통해 Find 연산 최적화
 */
 
 int find(int x) {
-	if (p[x] == -1) return x;
-	return x = find(p[x]); // 루트 노드 find(p[x])를 x에 대입 후 반환
+	if (p[x] < 0) return x;
+	return p[x] = find(p[x]); // 루트 노드 find(p[x])를 x에 대입 후 반환
 }
 
 /*
@@ -42,6 +42,9 @@ int main() {
 	cin.tie(NULL);
 
 	cin >> n >> m;
+	p.resize(n + 1);
+	fill(p.begin(), p.end(), -1);
+
 	while (m--) {
 		int q, a, b;
 		cin >> q >> a >> b;

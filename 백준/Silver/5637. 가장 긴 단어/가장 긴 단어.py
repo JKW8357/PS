@@ -1,8 +1,6 @@
 import sys
 import re
 
-text = sys.stdin.read()
-pattern = re.compile('[a-zA-Z0-9-]+')
-words = list(pattern.findall(text))
+words = re.findall(r'[a-zA-Z-]+', sys.stdin.read())
 words.remove('E-N-D')
 print(max(words, key=len).lower())

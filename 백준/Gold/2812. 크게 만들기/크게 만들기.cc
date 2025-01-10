@@ -23,8 +23,6 @@ int main() {
 		st.pop();
 	}
 
-	reverse(ans.begin(), ans.end());
-	for (char c : ans) cout << c;
-
+	for (int i = (int)ans.size() - 1; i >= 0; i--) cout << ans[i];
 	return 0;
 }

@@ -1,16 +1,13 @@
 import re
-
 n = int(input())
-pattern = re.compile(r'^(?!.*\.\.|^\..*|.*\.@|.*@\.|.*\.$)[\w.]{6,}@[A-Za-z\d\-.]{3,30}$')
-valid_address = set()
-
+p = re.compile(r'^(?!.*\.\.|^\..*|.*\.@|.*@\.|.*\.$)[\w.]{6,}@[A-Za-z\d\-.]{3,30}$')
+v = set()
 for _ in range(n):
-    address = input()
-    if re.match(pattern, address):
-        username, domain = address.split('@')
-        username = re.sub(r'\.', r'', username)
-        if 6 <= len(username) <= 30:
-            address = f'{username}@{domain}'
-            valid_address.add(address.lower())
-
-print(len(valid_address))
+    a = input()
+    if re.match(p, a):
+        u, d = a.split('@')
+        u = re.sub(r'\.', r'', u)
+        if 6 <= len(u) <= 30:
+            a = f'{u}@{d}'
+            v.add(a.lower())
+print(len(v))

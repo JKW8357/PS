@@ -1,7 +1,7 @@
 import re
 
 n = int(input())
-pattern = re.compile(r'^(?!.*\.\.)(?!^\..*)(?!.*\.@)(?!.*@\.)(?!.*\.$)[\w.]{6,}@[A-Za-z\d\-.]{3,30}$', re.IGNORECASE)
+pattern = re.compile(r'^(?!.*\.\.|^\..*|.*\.@|.*@\.|.*\.$)[\w.]{6,}@[A-Za-z\d\-.]{3,30}$')
 valid_address = set()
 
 for _ in range(n):

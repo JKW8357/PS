@@ -8,7 +8,7 @@ int vis[20][20];
 string board[20];
 
 int solve(int x, int y, int state) {
-	int result = 1;
+	int output = 1;
 	state |= (1 << (board[x][y] - 'A'));
 	if (vis[x][y] == state) return 0;
 	vis[x][y] = state;
@@ -18,10 +18,10 @@ int solve(int x, int y, int state) {
 		int ny = y + dy[dir];
 		if (nx < 0 || nx >= r || ny < 0 || ny >= c) continue;
 		if (!(state & (1 << (board[nx][ny] - 'A'))))
-			result = max(result, 1 + solve(nx, ny, state));
+			output = max(output, 1 + solve(nx, ny, state));
 	}
 
-	return result;
+	return output;
 }
 
 int main() {

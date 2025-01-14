@@ -14,8 +14,10 @@ int solve(int x, int y, int state) {
 		int nx = x + dx[dir];
 		int ny = y + dy[dir];
 		if (nx < 0 || nx >= r || ny < 0 || ny >= c) continue;
-		if (!(state & (1 << board[nx][ny])))
+		if (!(state & (1 << board[nx][ny]))) {
 			result = max(result, 1 + solve(nx, ny, state));
+			if (result == 26) break;
+		}
 	}
 
 	return result;

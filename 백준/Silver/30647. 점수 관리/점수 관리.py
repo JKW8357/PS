@@ -6,7 +6,7 @@ rank = 0
 prev_student = table[0]
 for i, student in enumerate(table):
     if i == 0 or student['score'] != prev_student['score']:
-        rank = max(rank + 1, i + 1)
+        rank = i + 1
         prev_student = student
     if student['isHidden']: continue
     print(rank, student['name'], student['score'])

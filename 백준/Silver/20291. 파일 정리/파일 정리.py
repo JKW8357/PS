@@ -1,11 +1,11 @@
 from collections import Counter
 
 n = int(input())
-extension = Counter()
+extensions = Counter()
 
 for _ in range(n):
-    filename = input()
-    extension[filename[filename.find('.') + 1:]] += 1
+    extension = input().split('.')[1]
+    extensions[extension] += 1
 
-for key, value in sorted(extension.items()):
+for key, value in sorted(extensions.items()):
     print(key, value)

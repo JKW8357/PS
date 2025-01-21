@@ -1,2 +1,1 @@
-import math
-print(10+math.floor(math.log(int(input()),2)))
+print(10+len(bin(int(input()))[3:]))

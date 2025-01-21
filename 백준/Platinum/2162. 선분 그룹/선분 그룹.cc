@@ -1,12 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef pair<double, double> p;
-typedef pair<p, p> l;
 #define x first
 #define y second
 
 vector<int> parent;
-vector<l> lines;
+vector<pair<p, p>> lines;
 
 int find(int x) {
 	if (parent[x] == x) return x;

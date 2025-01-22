@@ -50,12 +50,11 @@ int main() {
 
 	for (int i = 1; i <= n - 1; i++)
 		for (int j = i + 1; j <= n; j++)
-			if (isIntersect(lines[i - 1].x, lines[i - 1].y, lines[j - 1].x, lines[j - 1].y)) unite(i, j);
+			if (isIntersect(lines[i - 1].first, lines[i - 1].second, lines[j - 1].first, lines[j - 1].second)) unite(i, j);
 
 	vector<int> cnt(n + 1);
 	for (int e : parent) 
-		if (find(e) >= 1)
-			cnt[find(e)]++;
+		if (find(e) >= 1) cnt[find(e)]++;
 
 	int groupCnt = 0;
 	for (int e : cnt)

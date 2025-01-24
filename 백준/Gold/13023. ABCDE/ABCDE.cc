@@ -18,13 +18,6 @@ bool dfs(int cur, int depth) {
 	return false;
 }
 
-bool solve() {
-	for (int i = 0; i < n; i++) {
-		if (dfs(i, 1)) return true;
-	}
-	return false;
-}
-
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
@@ -37,6 +30,13 @@ int main() {
 		graph[v].push_back(u);
 	}
 
-	cout << (solve() ? 1 : 0) << '\n';
+	for (int i = 0; i < n; i++) {
+		if (dfs(i, 1)) {
+			cout << 1 << '\n';
+			return 0;
+		}
+	}
+
+	cout << 0 << '\n';
 	return 0;
 }

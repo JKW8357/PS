@@ -2,7 +2,7 @@
 using namespace std;
 
 vector<tuple<int, int, int>> adj;
-vector<int> p(10005, -1);
+vector<int> p(1005, -1);
 
 int find(int x) {
 	if (p[x] == -1) return x;

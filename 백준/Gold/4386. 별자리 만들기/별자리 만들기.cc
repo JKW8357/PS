@@ -4,7 +4,7 @@ using namespace std;
 #define Y second
 
 vector<pair<double, double>> coord;
-vector<tuple<double, double, double>> adj;
+vector<tuple<double, int, int>> adj;
 vector<int> p(100005, -1);
 
 int find(int x) {

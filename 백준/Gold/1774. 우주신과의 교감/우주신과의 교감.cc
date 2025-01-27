@@ -29,7 +29,7 @@ int main(void) {
 	cin >> n >> m;
 	coord.resize(n + 1);
 	for (int i = 1; i <= n; i++) cin >> coord[i].X >> coord[i].Y;
-
+	
 	int cnt = 0;
 	while (m--) {
 		int x, y;
@@ -49,14 +49,11 @@ int main(void) {
 	sort(adj.begin(), adj.end());
 
 	double ans = 0;
-	for (auto& e : adj) {
-		ll dist;
-		int i, j;
-		tie(dist, i, j) = e;
-		if (!unite(i, j)) continue;
-		ans += sqrt(dist);
-		cnt++;
-		if (cnt == n - 1) break;
+	for (auto& [dist, i, j] : adj) {
+	    if (!unite(i, j)) continue;
+	    ans += sqrt(dist);
+	    cnt++;
+	    if (cnt == n - 1) break;
 	}
 
 	cout << fixed << setprecision(2) << ans << '\n';

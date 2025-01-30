@@ -5,12 +5,12 @@ int subTreeSize[100005];
 vector<int> p(100005, -1);
 vector<int> adj[100005];
 
-int countSubtreeNode(int cur) {
+int dfs(int cur) {
 	subTreeSize[cur] = 1;
 	for (int nxt : adj[cur]) {
 		if (p[cur] == nxt) continue;
 		p[nxt] = cur;
-		subTreeSize[cur] += countSubtreeNode(nxt);
+		subTreeSize[cur] += dfs(nxt);
 	}
 	return subTreeSize[cur];
 }
@@ -29,7 +29,7 @@ int main() {
 		adj[v].push_back(u);
 	}
 
-	countSubtreeNode(r);
+	dfs(r);
 
 	while (q--) {
 		int u; cin >> u;

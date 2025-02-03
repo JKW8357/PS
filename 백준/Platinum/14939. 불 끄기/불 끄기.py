@@ -1,4 +1,3 @@
-import copy
 import sys
 input = sys.stdin.readline
 
@@ -32,7 +31,8 @@ bulbs = [list(input().strip()) for _ in range(10)]
 ans = float('inf')
 
 for first_row_mask in range(1 << 10):
-    cnt = check(copy.deepcopy(bulbs), first_row_mask)
+    bulbs_copy = [bulbs[i][:] for i in range(10)]
+    cnt = check(bulbs_copy, first_row_mask)
     ans = min(ans, cnt)
 
 print(ans if ans != float('inf') else -1)

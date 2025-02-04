@@ -18,14 +18,10 @@ def check(bulbs, is_toggled):
                 bulbs[j] = str(1 - int(bulbs[j]))
             cnt += 1
 
-    return cnt if bulbs[n - 1] == target_state[n - 1] else -1
+    return cnt if bulbs[n - 1] == target_state[n - 1] else float('inf')
 
-t1 = check(current_state.copy(), True)
-t2 = check(current_state.copy(), False)
+t1 = check(current_state[:], True)
+t2 = check(current_state[:], False)
 
-if t1 == -1 and t2 == -1:
-    print(-1)
-elif t1 * t2 < 0:
-    print(max(t1, t2))
-else:
-    print(min(t1, t2))
+result = min(t1, t2)
+print(result if result != float('inf') else -1)

@@ -35,4 +35,4 @@ for first_row_mask in range(1 << 10):
     cnt = check(bulbs_copy, first_row_mask)
     ans = min(ans, cnt)
 
-print(ans if ans != float('inf') else -1)
+print(ans)

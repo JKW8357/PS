@@ -4,7 +4,7 @@ input = sys.stdin.readline
 
 n = int(input())
 tasks = list(tuple(map(int, input().split())) for _ in range(n))
-max_day = max(d for d, w in tasks) if tasks else 0
+max_day = max(d for d, w in tasks)
 pq = []
 
 tasks.sort()

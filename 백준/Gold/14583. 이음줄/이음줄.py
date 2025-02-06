@@ -1,9 +1,6 @@
-import math
+from math import*
 h, v = map(float, input().split())
-k = (h * h + v * v) ** 0.5 - h
-y = (v * v - k * k) / (2 * v)
-x = (k * k + y * y) ** 0.5
-theta = math.pi / 2 - math.atan(y / h)
-row = (h * h + y * y) ** 0.5 / 2
-col = x * math.sin(theta)
-print(round(row, 3), round(col, 3))
+theta = atan(v / h) / 2
+r = round(h / (2 * cos(theta)), 2)
+c = round(v * cos(theta) - h * sin(theta), 2)
+print(r, c)

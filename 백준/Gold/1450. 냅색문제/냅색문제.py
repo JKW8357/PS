@@ -18,8 +18,7 @@ for i in range(len(weights_right) + 1):
     for combo in C(weights_right, i):
         w2.append(sum(combo))
 
-w1.sort()
 w2.sort()
 
-ans = sum(bisect_right(w2, c- weight) for weight in w1)
+ans = sum(bisect_right(w2, c - weight) for weight in w1)
 print(ans)

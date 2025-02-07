@@ -12,6 +12,7 @@ for i in range(1, n):
     dx = x[i] - x[i - 1]
     dy = y[i] - y[i - 1]
     dist = (dx * dx + dy * dy) ** 0.5
+    
     if dy > 0:
         left[i] = left[i - 1] + dist * 1
         right[i] = right[i - 1] + dist * 3

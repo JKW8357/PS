@@ -6,25 +6,21 @@ unordered_map<string, vector<string>> adj;
 unordered_map<string, int> ind;
 
 void topologicalSort() {
-	queue<string> q;
 	vector<string> result;
+	priority_queue<string, vector<string>, greater<string>> curPQ;
+	priority_queue<string, vector<string>, greater<string>> nextPQ;
 
 	for (auto& item : items)
-		if (ind[item] == 0) q.push(item);
+		if (ind[item] == 0) curPQ.push(item);
 
-	set<string> tmp;
-	while (!q.empty()) {
-		while (!q.empty()) {
-			string cur = q.front(); q.pop();
+	while (!curPQ.empty()) {
+		while (!curPQ.empty()) {
+			string cur = curPQ.top(); curPQ.pop();
 			result.push_back(cur);
 			for (auto& nxt : adj[cur])
-				if (--ind[nxt] == 0) tmp.insert(nxt);
-		} 
-
-		while (!tmp.empty()) {
-			q.push(*tmp.begin());
-			tmp.erase(tmp.begin());
+				if (--ind[nxt] == 0) nextPQ.push(nxt);
 		}
+		curPQ = move(nextPQ);
 	}
 
 	if (result.size() != items.size()) cout << -1 << '\n';

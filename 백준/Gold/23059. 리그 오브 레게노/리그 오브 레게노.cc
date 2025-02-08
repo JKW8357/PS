@@ -1,30 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+vector<vector<int>> adj;
+vector<int> ind;
+vector<string> names;
+unordered_map<string, int> id;
 set<string> items;
-unordered_map<string, vector<string>> adj;
-unordered_map<string, int> ind;
+vector<pair<string, string>> edges;
 
 void topologicalSort() {
-	vector<string> result;
-	priority_queue<string, vector<string>, greater<string>> curPQ;
-	priority_queue<string, vector<string>, greater<string>> nextPQ;
+	queue<int> q;
+	vector<int> result;
 
-	for (auto& item : items)
-		if (ind[item] == 0) curPQ.push(item);
+	for (int i = 0; i < (int)names.size(); i++)
+		if (ind[i] == 0) q.push(i);
 
-	while (!curPQ.empty()) {
-		while (!curPQ.empty()) {
-			string cur = curPQ.top(); curPQ.pop();
+	set<int> tmp;
+	while (!q.empty()) {
+		while (!q.empty()) {
+			int cur = q.front(); q.pop();
 			result.push_back(cur);
-			for (auto& nxt : adj[cur])
-				if (--ind[nxt] == 0) nextPQ.push(nxt);
+			for (auto nxt : adj[cur])
+				if (--ind[nxt] == 0) tmp.insert(nxt);
 		}
-		curPQ = move(nextPQ);
+		
+		while (!tmp.empty()) {
+			q.push(*tmp.begin());
+			tmp.erase(tmp.begin());
+		}
 	}
 
-	if (result.size() != items.size()) cout << -1 << '\n';
-	else for (auto& e : result) cout << e << '\n';
+	if (result.size() != names.size()) cout << -1 << '\n';
+	else for (auto e : result) cout << names[e] << '\n';
 }
 
 int main() {
@@ -33,14 +40,22 @@ int main() {
 
 	int n; cin >> n;
 	while (n--) {
-		string item1, item2;
-		cin >> item1 >> item2;
+		string a, b;
+		cin >> a >> b;
+		edges.push_back({ a, b });
+		items.insert(a);
+		items.insert(b);
+	}
 
-		items.insert(item1);
-		items.insert(item2);
+	for (const auto& s : items) names.push_back(s);
+	for (int i = 0; i < (int)names.size(); i++)	id[names[i]] = i;
 
-		adj[item1].push_back(item2);
-		ind[item2]++;
+	adj.assign(names.size(), vector<int>());
+	ind.assign(names.size(), 0);
+
+	for (auto& [a, b] : edges) {
+		adj[id[a]].push_back(id[b]);
+		ind[id[b]]++;
 	}
 
 	topologicalSort();

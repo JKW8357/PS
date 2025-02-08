@@ -3,7 +3,7 @@ using namespace std;
 typedef pair<int, int> pii;
 
 vector<pii> adj[1005][1005];
-int deg[1005][1005];
+int ind[1005][1005];
 int result[1005][1005];
 int n;
 
@@ -12,20 +12,19 @@ void topologicalSort() {
 
 	for (int i = 1; i <= n; i++)
 		for (int j = 1; j <= n; j++)
-			if (deg[i][j] == 0) q.push({ i, j });
+			if (ind[i][j] == 0) q.push({ i, j });
 
 	int num = 0;
 	while (!q.empty()) {
 		auto [x, y] = q.front(); q.pop();
 		result[x][y] = ++num;
-		for (auto [nx, ny] : adj[x][y]) {
-			deg[nx][ny]--;
-			if (deg[nx][ny] == 0) q.push({ nx, ny });
-		}
+		for (auto [nx, ny] : adj[x][y])
+			if (--ind[nx][ny] == 0) q.push({ nx, ny });
 	}
 
 	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++) cout << result[i][j] << ' ';
+		for (int j = 1; j <= n; j++)
+			cout << result[i][j] << ' ';
 		cout << '\n';
 	}
 }
@@ -41,11 +40,11 @@ int main() {
 			char ch; cin >> ch;
 			if (ch == '<') {
 				adj[i][j].push_back({ i, j + 1 });
-				deg[i][j + 1]++;
+				ind[i][j + 1]++;
 			}
 			else {
 				adj[i][j + 1].push_back({ i, j });
-				deg[i][j]++;
+				ind[i][j]++;
 			}
 		}
 	}
@@ -55,11 +54,11 @@ int main() {
 			char ch; cin >> ch;
 			if (ch == '<') {
 				adj[i][j].push_back({ i + 1, j });
-				deg[i + 1][j]++;
+				ind[i + 1][j]++;
 			}
 			else {
 				adj[i + 1][j].push_back({ i, j });
-				deg[i][j]++;
+				ind[i][j]++;
 			}
 		}
 	}

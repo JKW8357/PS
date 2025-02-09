@@ -3,21 +3,20 @@ using namespace std;
 
 vector<vector<int>> adj(100005);
 vector<vector<int>> reversedAdj(100005);
-vector<bool> reachable_from_1(100005, false);
-vector<bool> reachable_to_n(100005, false);
+vector<bool> from_1(100005, false);
+vector<bool> to_n(100005, false);
 
-void dfs(int start, vector<bool>& canVisit, vector<vector<int>>& graph) {
-	stack<int> st;
-	st.push(start);
-	canVisit[start] = true;
+void bfs(int start, vector<bool>& vis, vector<vector<int>>& graph) {
+	queue<int> q;
+	q.push(start);
+	vis[start] = true;
 
-	while (!st.empty()) {
-		int cur = st.top();
-		st.pop();
+	while (!q.empty()) {
+		int cur = q.front(); q.pop();
 		for (int nxt : graph[cur]) {
-			if (canVisit[nxt]) continue;
-			canVisit[nxt] = true;
-			st.push(nxt);
+			if (vis[nxt]) continue;
+			vis[nxt] = true;
+			q.push(nxt);
 		}
 	}
 }
@@ -36,14 +35,14 @@ int main() {
 		reversedAdj[v].push_back(u);
 	}
 
-	dfs(1, reachable_from_1, adj);
-	dfs(n, reachable_to_n, reversedAdj);
+	bfs(1, from_1, adj);
+	bfs(n, to_n, reversedAdj);
 
 	int t;
 	cin >> t;
 	while (t--) {
 		int bomb; cin >> bomb;
-		if (reachable_from_1[bomb] && reachable_to_n[bomb]) cout << "Defend the CTP\n";
+		if (from_1[bomb] && to_n[bomb]) cout << "Defend the CTP\n";
 		else cout << "Destroyed the CTP\n";
 	}
 

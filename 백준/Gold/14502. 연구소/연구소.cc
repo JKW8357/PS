@@ -4,7 +4,7 @@ using namespace std;
 #define Y second
 
 int n, m;
-int ans = 0;
+int ans = -1;
 int dx[4] = { 1,0,-1,0 };
 int dy[4] = { 0,1,0,-1 };
 int board[10][10];
@@ -38,25 +38,23 @@ int bfs() {
 	return safeZones;
 }
 
-void preprocess() {
-	for (int i = 0; i < n; i++)
-		for (int j = 0; j < m; j++)
-			outbreak[i][j] = board[i][j];
-}
-
 void solve() {
 	int blanksCount = blanks.size();
+	for (int i = 0; i < blanksCount - 2; i++) {
+		for (int j = i + 1; j < blanksCount - 1; j++) {
+			for (int k = j + 1; k < blanksCount; k++) {
+				for (int i = 0; i < n; i++)
+					for (int j = 0; j < m; j++)
+						outbreak[i][j] = board[i][j];
 
-	// next_permutation(): 초기값은 사전순에서 가장 작은 순열으로 설정: false(0) -> true(1)
-	vector<bool> isWall(blanksCount, true);
-	fill(isWall.begin(), isWall.end() - 3, false);
+				outbreak[blanks[i].X][blanks[i].Y] = 1;
+				outbreak[blanks[j].X][blanks[j].Y] = 1;
+				outbreak[blanks[k].X][blanks[k].Y] = 1;
 
-	do {
-		preprocess();
-		for (int i = 0; i < isWall.size(); i++)
-			if (isWall[i]) outbreak[blanks[i].X][blanks[i].Y] = 1;
-		ans = max(ans, bfs());
-	} while (next_permutation(isWall.begin(), isWall.end()));
+				ans = max(ans, bfs());
+			}
+		}
+	}
 }
 
 int main() {

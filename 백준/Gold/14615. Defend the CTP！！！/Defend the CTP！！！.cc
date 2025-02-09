@@ -6,18 +6,18 @@ vector<vector<int>> reversedAdj(100005);
 vector<bool> reachable_from_1(100005, false);
 vector<bool> reachable_to_n(100005, false);
 
-void bfs(int start, vector<bool>& canVisit, vector<vector<int>>& graph) {
-	queue<int> q;
-	q.push(start);
+void dfs(int start, vector<bool>& canVisit, vector<vector<int>>& graph) {
+	stack<int> st;
+	st.push(start);
 	canVisit[start] = true;
 
-	while (!q.empty()) {
-		int cur = q.front();
-		q.pop();
+	while (!st.empty()) {
+		int cur = st.top();
+		st.pop();
 		for (int nxt : graph[cur]) {
 			if (canVisit[nxt]) continue;
 			canVisit[nxt] = true;
-			q.push(nxt);
+			st.push(nxt);
 		}
 	}
 }
@@ -36,8 +36,8 @@ int main() {
 		reversedAdj[v].push_back(u);
 	}
 
-	bfs(1, reachable_from_1, adj);
-	bfs(n, reachable_to_n, reversedAdj);
+	dfs(1, reachable_from_1, adj);
+	dfs(n, reachable_to_n, reversedAdj);
 
 	int t;
 	cin >> t;

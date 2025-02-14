@@ -4,8 +4,8 @@ typedef pair<int, int> pii;
 const int INF = (int)1e9;
 
 int n;
-int dx[4] = { -1, 0, 0, 1 };
-int dy[4] = { 0, -1, 1, 0 };
+int dx[4] = { 1, 0, -1, 0 };
+int dy[4] = { 0, 1, 0, -1 };
 vector<vector<int>> board;
 vector<vector<int>> dis;
 
@@ -26,6 +26,7 @@ void setUp() {
 	cin >> n;
 	board.resize(n);
 	dis.assign(n, vector<int>(n, -1));
+
 	for (int i = 0; i < n; i++) {
 		board[i].resize(n);
 		for (int j = 0; j < n; j++) {
@@ -42,8 +43,8 @@ void setUp() {
 int eatFish() {
 	dis.assign(n, vector<int>(n, -1));
 	queue<pii> q;
-	dis[shark.x][shark.y] = 0;
 	q.push({ shark.x, shark.y });
+	dis[shark.x][shark.y] = 0;
 
 	int minDist = INF;
 	pii target = { INF, INF };
@@ -86,23 +87,13 @@ int eatFish() {
 	return minDist;
 }
 
-int solve() {
-	int result = 0;
-	while (true) {
-		int time = eatFish();
-		if (time == -1) break;
-		result += time;
-	}
-	
-	return result;
-}
-
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 
 	setUp();
-	int totalTime = solve();
+	int time = 0, totalTime = 0;
+	while ((time = eatFish()) != -1) totalTime += time;
 	cout << totalTime << '\n';
 
 	return 0;

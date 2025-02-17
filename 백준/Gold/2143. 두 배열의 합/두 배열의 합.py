@@ -18,7 +18,7 @@ def subarray_sums(arr):
             current_sum += arr[j]
             result.append(current_sum)
 
-    return sorted(result)
+    return result
 
 a_subarray_sums = subarray_sums(a)
 b_subarray_sums = Counter(subarray_sums(b))

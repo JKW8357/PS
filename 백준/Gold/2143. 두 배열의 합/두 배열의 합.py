@@ -1,4 +1,4 @@
-from bisect import*
+from collections import Counter
 import sys
 input = sys.stdin.readline
 
@@ -21,11 +21,10 @@ def subarray_sums(arr):
     return sorted(result)
 
 a_subarray_sums = subarray_sums(a)
-b_subarray_sums = subarray_sums(b)
+b_subarray_sums = Counter(subarray_sums(b))
 
 ans = 0
 for elem in a_subarray_sums:
-    target = total - elem
-    ans += bisect_right(b_subarray_sums, target) - bisect_left(b_subarray_sums, target)
+    ans += b_subarray_sums[total - elem]
 
 print(ans)

@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-deque<pair<int, int>> dq;
+deque<int> dq;
+vector<int> arr;
+string result;
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -9,16 +11,17 @@ int main() {
 
 	int n, l;
 	cin >> n >> l;
+	arr.resize(n);
+	for (int i = 0; i < n; i++) cin >> arr[i];
 
 	for (int i = 0; i < n; i++) {
-		int cur; cin >> cur;
+		if (!dq.empty() && dq.front() < i - l + 1) dq.pop_front();
+		while (!dq.empty() && arr[dq.back()] >= arr[i]) dq.pop_back();
 
-		if (!dq.empty() && dq.front().second < i - l + 1) dq.pop_front();
-		while (!dq.empty() && dq.back().first >= cur) dq.pop_back();
-
-		dq.push_back({ cur, i });
-		cout << dq.front().first << ' ';
+		dq.push_back(i);
+		result += to_string(arr[dq.front()]) + " ";
 	}
 
+	cout << result << '\n';
 	return 0;
 }

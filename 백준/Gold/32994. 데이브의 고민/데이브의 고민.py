@@ -1,3 +1,6 @@
+import sys
+input = sys.stdin.readline
+
 fish = '12345'
 n, m = map(int, input().split())
 

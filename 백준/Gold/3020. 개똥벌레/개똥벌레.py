@@ -1,4 +1,3 @@
-from collections import defaultdict
 from bisect import*
 import sys
 input = sys.stdin.readline
@@ -7,19 +6,23 @@ n, h = map(int, input().split())
 up = []
 down = []
 
-for i in range(0, n - 1, 2):
-    up.append(int(input()))
-    down.append(int(input()))
+for i in range(n):
+    if i % 2 == 0:
+        up.append(int(input()))
+    else:
+        down.append(int(input()))
 
-up.sort(reverse=True)
-down.sort(reverse=True)
+up.sort()
+down.sort()
 
-d = defaultdict(int)
+result = [0] * (n + 1)
+ans = sys.maxsize
+
 for height in range(1, h + 1):
-    ob1 = bisect_right(up, -height, key=lambda x: -x)
-    ob2 = bisect_right(down, -(h - height + 1), key=lambda x: -x)
-    cnt = ob1 + ob2
-    d[cnt] += 1
+    up_boundary = bisect_left(up, height)
+    down_boundary = bisect_left(down, h - height + 1)
+    cnt = n - (up_boundary + down_boundary)
+    result[cnt] += 1
+    ans = min(ans, cnt)
 
-min_val = min(d.keys())
-print(min_val, d[min_val])
+print(ans, result[ans])

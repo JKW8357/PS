@@ -1,28 +1,17 @@
-from bisect import*
 import sys
 input = sys.stdin.readline
 
 n, h = map(int, input().split())
-up = []
-down = []
+diff = [0] * h
 
-for i in range(n):
-    if i % 2 == 0:
-        up.append(int(input()))
-    else:
-        down.append(int(input()))
+for i in range(0, n, 2):
+    diff[0] += 1
+    diff[int(input())] -= 1
+    diff[h - int(input())] += 1
 
-up.sort()
-down.sort()
+for i in range(1, h):
+    diff[i] += diff[i - 1]
 
-result = [0] * (n + 1)
-ans = sys.maxsize
-
-for height in range(1, h + 1):
-    up_boundary = bisect_left(up, height)
-    down_boundary = bisect_left(down, h - height + 1)
-    cnt = n - (up_boundary + down_boundary)
-    result[cnt] += 1
-    ans = min(ans, cnt)
-
-print(ans, result[ans])
+ans = min(diff)
+cnt = diff.count(ans)
+print(ans, cnt)

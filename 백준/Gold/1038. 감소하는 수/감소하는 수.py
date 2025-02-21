@@ -8,7 +8,6 @@ result = []
 
 for i in range(1, len(digits) + 1):
     for combo in C(digits, i):
-        if len(combo) > 1 and combo[0] == '0': continue
         result.append(int(''.join(combo)))
 
 result.sort()

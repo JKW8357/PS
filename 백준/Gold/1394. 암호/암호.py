@@ -5,10 +5,15 @@ MOD = 900528
 letters = list(input().strip())
 d = {char: i + 1 for i, char in enumerate(letters)}
 password = list(reversed(input().strip()))
+n = len(letters)
+m = [1]
 
-ans = d[password[0]] % MOD
-for i in range(1, len(password)):
-    ans += pow(len(letters), i, MOD) * d[password[i]]
+for _ in password:
+    m.append(m[-1] * n % MOD)
+
+ans = 0
+for i, x in enumerate(password):
+    ans += m[i] * d[x]
     ans %= MOD
 
 print(ans)

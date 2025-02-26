@@ -1,22 +1,25 @@
 import sys
 input = sys.stdin.readline
 
-def dfs(x, y):
-    if x == n - 1 and y == n - 1: return 1
-    if dp[x][y] != -1: return dp[x][y]
+def bfs():
+    queue = [(0, 0)]
+    vis[0][0] = True
 
-    jump = board[x][y]
-    if jump == 0: return 0
+    while queue:
+        x, y = queue.pop()
+        if board[x][y] == -1: return True
+        jump = board[x][y]
 
-    dp[x][y] = 0
-    for dx, dy in [(0, 1), (1, 0)]:
-        nx, ny = x + jump * dx, y + jump * dy
-        if 0 <= nx < n and 0 <= ny < n:
-            if dfs(nx, ny): dp[x][y] = 1
+        for dx, dy in dir:
+            nx, ny = x + jump * dx, y + jump * dy
+            if 0 <= nx < n and 0 <= ny < n and not vis[nx][ny]:
+                queue.append((nx, ny))
+                vis[nx][ny] = True
 
-    return dp[x][y]
+    return False
 
 n = int(input())
+dir = [(0, 1), (1, 0)]
 board = [list(map(int, input().split())) for _ in range(n)]
-dp = [[-1] * n for _ in range(n)]
-print("HaruHaru" if dfs(0, 0) else "Hing")
+vis = [[False] * n for _ in range(n)]
+print('HaruHaru' if bfs() else 'Hing')

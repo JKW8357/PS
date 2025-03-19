@@ -1,27 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int n;
+int ans = 0;
+bool vis[10];
+vector<int> arr;
 vector<int> vec;
+
+void solve(int depth) {
+	if (depth == n) {
+		int sum = 0;
+		for (int i = 0; i < n - 1; i++)
+			sum += abs(vec[i] - vec[i + 1]);
+		ans = max(ans, sum);
+		return;
+	}
+
+	for (int i = 0; i < n; i++) {
+		if (vis[i]) continue;
+
+		vec.push_back(arr[i]);
+		vis[i] = true;
+
+		solve(depth + 1);
+
+		vis[i] = false;
+		vec.pop_back();
+	}
+}
 
 int main() {
 	ios::sync_with_stdio(false);
-	cin.tie(NULL);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
 
-	int n; cin >> n;
-	int ans = 0;
+	cin >> n;
+	arr.resize(n);
+	for (int i = 0; i < n; i++) cin >> arr[i];
+
+	solve(0);
 	
-	for (int i = 0; i < n; i++) {
-		int num; cin >> num;
-		vec.push_back(num);
-	}
-	sort(vec.begin(), vec.end());
-
-	do {
-		int sum = 0;
-		for (int i = 0; i < n - 1; i++) sum += abs(vec[i] - vec[i + 1]);
-		ans = max(ans, sum);
-	} while (next_permutation(vec.begin(), vec.end()));
-
 	cout << ans << '\n';
 	return 0;
 }

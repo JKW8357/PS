@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-map<string, priority_queue<int>> m;
+unordered_map<string, priority_queue<int>> m;
 
 int main() {
 	ios::sync_with_stdio(false);

@@ -2,7 +2,7 @@
 using namespace std;
 
 const int OFFSET = 1000000;
-bool arr[2000000];
+bool arr[2000001];
 
 int main() {
 	ios::sync_with_stdio(false);

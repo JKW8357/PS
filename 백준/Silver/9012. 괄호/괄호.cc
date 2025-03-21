@@ -67,7 +67,7 @@ public:
 int main() {
 	int n; cin >> n;
 	while (n--) {
-		ArrayStack st(55);
+		ListStack st;
 		string str; cin >> str;
 		bool isCorrect = true;
 		for (char c : str) {

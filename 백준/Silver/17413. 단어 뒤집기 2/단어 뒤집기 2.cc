@@ -68,7 +68,7 @@ int main() {
 	string str;
 	getline(cin, str);
 	
-	ListStack st;
+	ArrayStack st(100005);
 	string tmp;
 	bool tag = false;
 	for (char c : str) {

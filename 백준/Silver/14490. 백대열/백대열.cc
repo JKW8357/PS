@@ -7,19 +7,13 @@ int gcd(int a, int b) {
 }
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
-	cout.tie(nullptr);
-
-	string s; cin >> s;
-	int splitIdx = s.find(':');
-	int n = stoi(s.substr(0, splitIdx));
-	int m = stoi(s.substr(splitIdx + 1));
+	int n, m;
+	scanf("%d:%d", &n, &m);
 
 	int GCD = gcd(n, m);
 	n /= GCD; m /= GCD;
 
-	cout << n << ':' << m << '\n';
+	printf("%d:%d", n, m);
 
 	return 0;
 }

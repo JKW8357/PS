@@ -7,7 +7,6 @@ bool vis[10005];
 vector<pair<int, int>> adj[10005];
 
 void dfs(int cur, int cost) {
-	vis[cur] = true;
 	if (mxCost < cost) {
 		mxCost = cost;
 		mxNode = cur;
@@ -32,9 +31,11 @@ int main() {
 		adj[u].push_back({ v, c });
 		adj[v].push_back({ u, c });
 	}
-
+    
+    vis[1] = true;
 	dfs(1, 0);
 	fill(vis, vis + n + 1, false);
+    vis[mxNode] = true;
 	dfs(mxNode, 0);
 	cout << mxCost << '\n';
 

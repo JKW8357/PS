@@ -9,8 +9,7 @@ void floyd() {
 	for (int k = 1; k <= n; k++)
 		for (int i = 1; i <= n; i++)
 			for (int j = 1; j <= n; j++)
-				if (adj[i][j] > adj[i][k] && adj[i][j] > adj[k][j])
-					adj[i][j] = max(adj[i][k], adj[k][j]);
+				adj[i][j] = min(adj[i][j], max(adj[i][k], adj[k][j]));
 }
 
 int main() {

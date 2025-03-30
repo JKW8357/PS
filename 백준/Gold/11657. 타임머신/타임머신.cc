@@ -1,11 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef tuple<int, int, long long> tup;
+typedef long long ll;
+typedef tuple<int, int, ll> tup;
 
 int n, m;
-const int INF = (int)1e9;
+const int INF = (int)1e18;
 vector<tup> adj;
-vector<int> dist;
+vector<ll> dist;
 
 bool bellmanFord(int st) {
 	dist.assign(n + 1, INF);
@@ -30,7 +31,7 @@ int main() {
 	cin >> n >> m;	
 	while (m--) {
 		int a, b;
-		long long c;
+		ll c;
 		cin >> a >> b >> c;
 		adj.push_back({ a, b, c });
 	}

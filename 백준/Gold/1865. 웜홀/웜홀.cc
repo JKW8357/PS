@@ -5,19 +5,6 @@ int n, m, w;
 const int INF = (int)1e9;
 int adj[505][505];
 
-void floyd() {
-	for (int k = 1; k <= n; k++) {
-		for (int i = 1; i <= n; i++) {
-			if (adj[i][k] == INF) continue;
-			for (int j = 1; j <= n; j++) {
-				if (adj[k][j] == INF) continue;
-				int temp = adj[i][k] + adj[k][j];
-				if (temp < adj[i][j]) adj[i][j] = temp;
-			}
-		}
-	}
-}
-
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(nullptr);
@@ -44,7 +31,16 @@ int main() {
 			if (adj[s][e] > -t) adj[s][e] = -t;
 		}
 
-		floyd();
+		for (int k = 1; k <= n; k++) {
+			for (int i = 1; i <= n; i++) {
+				if (adj[i][k] == INF) continue;
+				for (int j = 1; j <= n; j++) {
+					if (adj[k][j] == INF) continue;
+					int temp = adj[i][k] + adj[k][j];
+					if (temp < adj[i][j]) adj[i][j] = temp;
+				}
+			}
+		}
 
 		bool foundNegativeCycle = false;
 		for (int i = 1; i <= n; i++) {

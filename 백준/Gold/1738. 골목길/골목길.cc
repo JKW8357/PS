@@ -7,29 +7,20 @@ const int INF = (int)1e9;
 vector<vector<pii>> adj;
 vector<int> dist, pre;
 
-void bellmanFord() {
+void bellmanFord(int st) {
 	dist.assign(n + 1, -INF);
 	pre.assign(n + 1, -1);
-	dist[1] = 0;
+	dist[st] = 0;
 
 	for (int i = 1; i <= n; i++) {
-		for (int u = 1; u <= n; u++) {
-			if (dist[u] == -INF) continue;
-			for (auto [v, cost] : adj[u]) {
-				if (dist[v] < dist[u] + cost) {
-					dist[v] = dist[u] + cost;
-					pre[v] = u;
-					if (i == n) dist[v] = INF;
+		for (int cur = 1; cur <= n; cur++) {
+			if (dist[cur] == -INF) continue;
+			for (auto [nxt, cost] : adj[cur]) {
+				if (dist[nxt] < dist[cur] + cost) {
+					dist[nxt] = dist[cur] + cost;
+					pre[nxt] = cur;
+					if (i == n) dist[nxt] = INF;
 				}
-			}
-		}
-	}
-
-	for (int u = 1; u <= n; u++) {
-		if (dist[u] == -INF) continue;
-		for (auto [v, cost] : adj[u]) {
-			if (dist[v] < dist[u] + cost) {
-				dist[v] = INF;
 			}
 		}
 	}
@@ -47,7 +38,7 @@ int main() {
 		adj[a].push_back({ b, c });
 	}
 
-	bellmanFord();
+	bellmanFord(1);
 
 	if (dist[n] == INF || dist[n] == -INF) {
 		cout << -1 << '\n';

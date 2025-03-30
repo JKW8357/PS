@@ -4,7 +4,7 @@ typedef long long ll;
 typedef tuple<int, int, ll> tup;
 
 int n, m;
-const int INF = (int)1e18;
+const ll INF = (ll)1e18;
 vector<tup> adj;
 vector<ll> dist;
 

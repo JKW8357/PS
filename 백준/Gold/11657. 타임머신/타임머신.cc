@@ -1,45 +1,48 @@
 #include <bits/stdc++.h>
 using namespace std;
+typedef tuple<int, int, long long> tup;
 
 int n, m;
 const int INF = (int)1e9;
-vector<vector<int>> adj;
+vector<tup> adj;
+vector<int> dist;
 
-void floyd() {
-	for (int k = 1; k <= n; k++)
-		for (int i = 1; i <= n; i++)
-			for (int j = 1; j <= n; j++) {
-				if (adj[i][k] == INF || adj[k][j] == INF) continue;
-				if (adj[i][j] > adj[i][k] + adj[k][j])
-					adj[i][j] = adj[i][k] + adj[k][j];
+bool bellmanFord(int st) {
+	dist.assign(n + 1, INF);
+	dist[st] = 0;
+
+	for (int i = 1; i <= n; i++) {
+		for (auto [cur, nxt, cost] : adj) {
+			if (dist[cur] != INF && dist[cur] + cost < dist[nxt]) {
+				dist[nxt] = dist[cur] + cost;
+				if (i == n) return true;
 			}
+		}
+	}
+
+	return false;
 }
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(nullptr);
-	cout.tie(nullptr);
 
-	cin >> n >> m;
-	adj.assign(n + 1, vector<int>(n + 1, INF));
-
+	cin >> n >> m;	
 	while (m--) {
-		int a, b, c;
+		int a, b;
+		long long c;
 		cin >> a >> b >> c;
-		if (adj[a][b] > c) adj[a][b] = c;
+		adj.push_back({ a, b, c });
 	}
 
-	floyd();
-
-	for (int k = 1; k <= n; k++) {
-		if (adj[1][k] != INF && adj[k][k] < 0) {
-			cout << -1 << '\n';
-			return 0;
-		}
+	bool hasNegativeCycle = bellmanFord(1);
+	if (hasNegativeCycle) {
+		cout << -1 << '\n';
+		return 0;
 	}
 
 	for (int k = 2; k <= n; k++)
-		cout << (adj[1][k] != INF ? adj[1][k] : -1) << '\n';
+		cout << (dist[k] != INF ? dist[k] : -1) << '\n';
 
 	return 0;
 }

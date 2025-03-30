@@ -36,8 +36,8 @@ int main() {
 				if (adj[i][k] == INF) continue;
 				for (int j = 1; j <= n; j++) {
 					if (adj[k][j] == INF) continue;
-					int temp = adj[i][k] + adj[k][j];
-					if (temp < adj[i][j]) adj[i][j] = temp;
+					if (adj[i][j] > adj[i][k] + adj[k][j])
+                        adj[i][j] = adj[i][k] + adj[k][j];
 				}
 			}
 		}

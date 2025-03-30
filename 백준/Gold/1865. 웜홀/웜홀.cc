@@ -43,6 +43,8 @@ int main() {
 	while (tc--) {
 		cin >> n >> m >> w;
 		adj.assign(n + 1, vector<pll>());
+		for (int i = 1; i <= n; i++)
+			adj[0].push_back({ i, 0 });
 
 		while (m--) {
 			int a, b; ll c;
@@ -57,15 +59,7 @@ int main() {
 			adj[a].push_back({ b, -c });
 		}
 
-		bool hasNegativeCycle = false;
-		for (int i = 1; i <= n; i++) {
-			if (spfa(i)) {
-				hasNegativeCycle = true;
-				break;
-			}
-		}
-
-		cout << (hasNegativeCycle ? "YES\n" : "NO\n");
+		cout << (spfa(0) ? "YES\n" : "NO\n");
 	}
 
 	return 0;

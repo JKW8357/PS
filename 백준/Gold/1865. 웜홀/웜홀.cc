@@ -3,14 +3,19 @@ using namespace std;
 
 int n, m, w;
 const int INF = (int)1e9;
-vector<vector<int>> adj;
+int adj[505][505];
 
 void floyd() {
-	for (int k = 1; k <= n; k++)
-		for (int i = 1; i <= n; i++)
-			for (int j = 1; j <= n; j++)
-				if (adj[i][j] > adj[i][k] + adj[k][j])
-					adj[i][j] = adj[i][k] + adj[k][j];
+	for (int k = 1; k <= n; k++) {
+		for (int i = 1; i <= n; i++) {
+			if (adj[i][k] == INF) continue;
+			for (int j = 1; j <= n; j++) {
+				if (adj[k][j] == INF) continue;
+				int temp = adj[i][k] + adj[k][j];
+				if (temp < adj[i][j]) adj[i][j] = temp;
+			}
+		}
+	}
 }
 
 int main() {
@@ -21,7 +26,7 @@ int main() {
 	int tc; cin >> tc;
 	while (tc--) {
 		cin >> n >> m >> w;
-		adj.assign(n + 1, vector<int>(n + 1, INF));
+		for (int i = 1; i <= n; i++) fill(adj[i] + 1, adj[i] + n + 1, INF);
 		for (int i = 1; i <= n; i++) adj[i][i] = 0;
 
 		while (m--) {
@@ -48,7 +53,7 @@ int main() {
 				break;
 			}
 		}
-		
+
 		cout << (foundNegativeCycle ? "YES\n" : "NO\n");
 	}
 

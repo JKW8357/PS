@@ -1,56 +1,71 @@
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
+typedef pair<int, ll> pll;
 
 int n, m, w;
-const int INF = (int)1e9;
-int adj[505][505];
+const ll INF = 1e18;
+vector<vector<pll>> adj;
+vector<ll> dist;
+
+bool spfa(int st) {
+	dist.assign(n + 1, INF);
+	vector<bool> vis(n + 1, false);
+	vector<int> cnt(n + 1, 0);
+	queue<int> q;
+
+	dist[st] = 0;
+	q.push(st); vis[st] = true;
+	++cnt[st];
+
+	while (!q.empty()) {
+		int cur = q.front(); q.pop();
+		vis[cur] = false;
+		for (auto [nxt, cost] : adj[cur]) {
+			if (dist[cur] != INF && dist[nxt] > dist[cur] + cost) {
+				dist[nxt] = dist[cur] + cost;
+				if (!vis[nxt]) {
+					q.push(nxt); vis[nxt] = true;
+					if (++cnt[nxt] >= n) return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(nullptr);
-	cout.tie(nullptr);
 
 	int tc; cin >> tc;
 	while (tc--) {
 		cin >> n >> m >> w;
-		for (int i = 1; i <= n; i++) fill(adj[i] + 1, adj[i] + n + 1, INF);
-		for (int i = 1; i <= n; i++) adj[i][i] = 0;
+		adj.assign(n + 1, vector<pll>());
 
 		while (m--) {
-			int s, e, t;
-			cin >> s >> e >> t;
-			if (adj[s][e] > t) {
-				adj[s][e] = t;
-				adj[e][s] = t;
-			}
+			int a, b; ll c;
+			cin >> a >> b >> c;
+			adj[a].push_back({ b, c });
+			adj[b].push_back({ a, c });
 		}
 
 		while (w--) {
-			int s, e, t;
-			cin >> s >> e >> t;
-			if (adj[s][e] > -t) adj[s][e] = -t;
+			int a, b; ll c;
+			cin >> a >> b >> c;
+			adj[a].push_back({ b, -c });
 		}
 
-		for (int k = 1; k <= n; k++) {
-			for (int i = 1; i <= n; i++) {
-				if (adj[i][k] == INF) continue;
-				for (int j = 1; j <= n; j++) {
-					if (adj[k][j] == INF) continue;
-					if (adj[i][j] > adj[i][k] + adj[k][j])
-                        adj[i][j] = adj[i][k] + adj[k][j];
-				}
-			}
-		}
-
-		bool foundNegativeCycle = false;
+		bool hasNegativeCycle = false;
 		for (int i = 1; i <= n; i++) {
-			if (adj[i][i] < 0) {
-				foundNegativeCycle = true;
+			if (spfa(i)) {
+				hasNegativeCycle = true;
 				break;
 			}
 		}
 
-		cout << (foundNegativeCycle ? "YES\n" : "NO\n");
+		cout << (hasNegativeCycle ? "YES\n" : "NO\n");
 	}
 
 	return 0;

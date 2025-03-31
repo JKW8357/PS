@@ -3,21 +3,21 @@ using namespace std;
 typedef long long ll;
 
 int n, m, k;
-vector<ll> fenwickTree;
+vector<ll> BIT;
 vector<ll> arr;
 
 ll sum(int idx) {
 	ll result = 0;
 	while (idx) {
-		result += fenwickTree[idx];
+		result += BIT[idx];
 		idx -= (idx & -idx);
 	}
 	return result;
 }
 
-void update(int idx, ll diff) {
-	while (idx <= (int)fenwickTree.size()) {
-		fenwickTree[idx] += diff;
+void update(int idx, ll val) {
+	while (idx < (int)BIT.size()) {
+		BIT[idx] += val;
 		idx += (idx & -idx);
 	}
 }
@@ -28,7 +28,7 @@ int main() {
 	cout.tie(nullptr);
 
 	cin >> n >> m >> k;
-	fenwickTree.assign(n + 1, 0);
+	BIT.assign(n + 1, 0);
 	arr.assign(n + 1, 0);
 	for (int i = 1; i <= n; i++) {
 		ll x; cin >> x;

@@ -2,24 +2,6 @@
 using namespace std;
 
 vector<vector<int>> adj(13);
-bool vis[13];
-
-int dfs(int cur) {
-	if (adj[cur].size() == 3) {
-		int nxtEdgesCount = 0;
-		for (int nxt : adj[cur]) nxtEdgesCount += (int)adj[nxt].size();
-		if (nxtEdgesCount == 6) return cur;
-	}
-
-	for (int nxt : adj[cur]) {
-		if (vis[nxt]) continue;
-		vis[nxt] = true;
-		int result = dfs(nxt);
-		if (result != -1) return result;
-	}
-
-	return -1;
-}
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -33,8 +15,17 @@ int main() {
 		adj[b].push_back(a);
 	}
 
-	vis[1] = true;
-	cout << dfs(1) << '\n';
+	for (int cur = 1; cur <= 12; cur++) {
+		if (adj[cur].size() == 3) {
+			int nxtEdgesCount = 0;
+			for (int nxt : adj[cur])
+				nxtEdgesCount += (int)adj[nxt].size();
+			if (nxtEdgesCount == 6) {
+				cout << cur << '\n';
+				break;
+			}
+		}
+	}
 
 	return 0;
 }

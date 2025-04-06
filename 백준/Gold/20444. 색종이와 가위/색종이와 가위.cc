@@ -10,16 +10,16 @@ int main() {
 	ll n, k;
 	cin >> n >> k;
 	
-	ll lo = -1, hi = n / 2 + 1;
-	while (lo + 1 < hi) {
+	ll lo = 0, hi = n / 2;
+	while (lo <= hi) {
 		ll mid = (lo + hi) / 2;
 		ll calc = mid * (n - mid) + n + 1;
 		if (calc == k) {
 			cout << "YES\n";
 			return 0;
 		}
-		else if (calc < k) lo = mid;
-		else hi = mid;
+		else if (calc < k) lo = mid + 1;
+		else hi = mid - 1;
 	}
 
 	cout << "NO\n";

@@ -1,0 +1,6 @@
+n, m = map(int, input().split())
+sx, sy = map(int, input().split())
+ex, ey = map(int, input().split())
+if (sx, sy) == (ex, ey): print('YES')
+elif n == 1 or m == 1: print('NO')
+else: print('YES' if (sx + sy) % 2 == (ex + ey) % 2 else 'NO')

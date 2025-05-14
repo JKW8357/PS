@@ -4,12 +4,8 @@ input = sys.stdin.readline
 n, m = map(int, input().split())
 arr = list(map(int, input().split()))
 
-prefix_sum = [arr[0]] * n
 suffix_max = [arr[-1]] * n
 prefix_min = [arr[0]] * n
-
-for i in range(1, n):
-    prefix_sum[i] = prefix_sum[i - 1] + arr[i]
 
 for i in range(1, n):
     prefix_min[i] = min(arr[i], prefix_min[i - 1])

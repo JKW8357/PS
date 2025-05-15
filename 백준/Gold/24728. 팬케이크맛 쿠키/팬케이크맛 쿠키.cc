@@ -14,34 +14,33 @@ int PanCakeCookie::getScore() { return this->score; }
 int PanCakeCookie::getC() { return this->curC; }
 
 void PanCakeCookie::reset() {
-    this->x = this->y = this->t = this->score = 0;
-    this->curC = this->maxC;
+    x = y = t = score = 0;
+    curC = maxC;
 }
 
 void PanCakeCookie::setU(int x) {
     if (x < 1 || x > 1000) return;
-    this->u = x;
+    u = x;
     reset();
 }
 
 void PanCakeCookie::setD(int x) {
     if (x < 1 || x > 1000) return;
-    this->d = x;
+    d = x;
     reset();
 }
 
 void PanCakeCookie::setC(int x) {
     if (x < 1 || x > 1000) return;
-    this->maxC = x;
+    maxC = x;
     reset();
 }
 
 void PanCakeCookie::setT(int t) {
-    if (t < 0 || t >= this->w) return;
+    if (t < 0 || t >= w) return;
     reset();
 
-    this->x = this->t = t;
-
+    x = this->t = t;
     for (int i = 1; i <= t; ++i) {
         if (curC > 0) {
             y = min(h, y + u);

@@ -50,7 +50,7 @@ int main() {
 
     int s, x, y;
     cin >> s >> x >> y;
-    cout << bfs(s, x , y) << '\n';
+    cout << bfs(s, x, y) << '\n';
 
     return 0;
 }

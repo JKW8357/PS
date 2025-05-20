@@ -12,7 +12,7 @@ int main() {
     for (int i = 0; i < n; i++) color[0].push(n);
     for (int i = 0; i < n - 1; i++) color[1].push(n - 1);
     for (int i = 0; i < n - 2; i++) color[2].push(n - 2);
-    int cur = n - 3, cnt = n - 3;
+    int cur = n - 3;
 
     if (n == 1) {
         cout << 1 << '\n';

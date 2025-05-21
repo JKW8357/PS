@@ -1,3 +1,6 @@
+import sys
+input = sys.stdin.readline
+
 n, p, q = map(int,input().split())
 dp = {}
 dp[0] = 1

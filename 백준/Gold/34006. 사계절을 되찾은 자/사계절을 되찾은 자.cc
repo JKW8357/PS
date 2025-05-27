@@ -6,13 +6,12 @@ int n;
 int A, B, C;
 int a, b, c;
 int sum;
-int m = 0;
 pii cur;
 string s;
 
 vector<vector<char>> vis(2005, vector<char>(2005, ' '));
 vector<vector<pii>> p(2005, vector<pii>(2005, { -1, -1 }));
-vector<char> track;
+string track;
 
 pii bfs(int A, int B) {
     queue<pair<int, int>> q;
@@ -67,13 +66,12 @@ int main() {
     }
 
     while (p[curA][curB] != make_pair(-1, -1)) {
-        track.push_back(vis[curA][curB]);
+        track += vis[curA][curB];
         tie(curA, curB) = p[curA][curB];
     }
 
     reverse(track.begin(), track.end());
-    cout << track.size() << '\n';
-    for (char c : track) cout << c;
+    cout << track.size() << '\n' << track << '\n';
 
     return 0;
 }

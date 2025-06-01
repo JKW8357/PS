@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int dp[1000005][2];
+vector<int> adj[1000005];
+
+void solve(int cur, int par) {
+    dp[cur][0] = 0;
+    dp[cur][1] = 1;
+    for (int nxt : adj[cur]) {
+        if (nxt == par) continue;
+        solve(nxt, cur);
+        dp[cur][0] += dp[nxt][1];
+        dp[cur][1] += min(dp[nxt][0], dp[nxt][1]);
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+
+    int n; cin >> n;
+    for (int i = 0; i < n - 1; i++) {
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    solve(1, -1);
+    cout << min(dp[1][0], dp[1][1]) << '\n';
+    return 0;
+}

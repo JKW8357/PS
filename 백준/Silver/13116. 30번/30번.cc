@@ -10,7 +10,6 @@ int main() {
     while (tc--) {
         int a, b;
         cin >> a >> b;
-        if (a > b) swap(a, b);
         while (a != b) {
             if (a > b) a /= 2;
             else b /= 2;

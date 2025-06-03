@@ -24,7 +24,7 @@ int main() {
         cost[i][i] = 1;
         cost[i][0] = cost[0][i] = 2;
         cost[i][(i + 1 + (int)(i >= 4)) % 5] = cost[(i + 1 + (int)(i >= 4)) % 5][i] = 3;
-        cost[i][(i + 2 + (int)(i >= 3)) % 5] = cost[(i + 2) % 5 + (int)(i >= 3)][i] = 4;
+        cost[i][(i + 2 + (int)(i >= 3)) % 5] = cost[(i + 2 + (int)(i >= 3)) % 5][i] = 4;
     }
 
     for (int i = 1; i <= n; i++) {

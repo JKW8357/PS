@@ -1,9 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
+typedef pair<int, int> pii;
 
-vector<int> LIS(const vector<int>& vec) {
+set<int> LIS(const vector<int>& vec) {
 	int size = (int)vec.size();
-	vector<int> tmp, idx(size), res;
+	vector<int> tmp, idx(size);
 
 	for (int i = 0; i < size; i++) {
 		int pos = lower_bound(tmp.begin(), tmp.end(), vec[i]) - tmp.begin();
@@ -12,14 +13,14 @@ vector<int> LIS(const vector<int>& vec) {
 		idx[i] = pos;
 	}
 
+	set<int> res;
 	int len = (int)tmp.size();
 	for (int i = size - 1; i >= 0; i--) {
 		if (idx[i] == len - 1) {
-			res.push_back(vec[i]);
+			res.insert(vec[i]);
 			len--;
 		}
 	}
-	reverse(res.begin(), res.end());
 
 	return res;
 }
@@ -30,25 +31,19 @@ int main() {
 	cout.tie(nullptr);
 
 	int n; cin >> n;
-	map<int, int> arr, rev;
-	set<int> s;
-	for (int i = 0; i < n; i++) {
-		int a, b;
-		cin >> a >> b;
-		arr[a] = b;
-		rev[b] = a;
-		s.insert(b);
-	}
+	vector<pii> wires(n);
+	for (int i = 0; i < n; i++) cin >> wires[i].first >> wires[i].second;
+	sort(wires.begin(), wires.end());
 
 	vector<int> vec;
-	for (auto& [idx, val] : arr) vec.push_back(val);
+	for (auto& [a, b] : wires) vec.push_back(b);
 
-	vector<int> lis = LIS(vec);
-	set<int> ans;
+	set<int> lis = LIS(vec);
+	vector<int> ans;
+	for (auto& [a, b] : wires)
+		if (!lis.count(b)) ans.push_back(a);
 
-	for (int b : lis) s.erase(b);
-	for (int b : s) ans.insert(rev[b]);
-
+	sort(ans.begin(), ans.end());
 	cout << ans.size() << '\n';
 	for (int a : ans) cout << a << '\n';
 

@@ -10,13 +10,8 @@ int main() {
     cin >> n >> f;
     n = n / 100 * 100;
     
-    for (int i = 0; i < 100; i++) {
-        if (n % f == 0) {
-            cout << setw(2) << setfill('0') << n % 100 << '\n';
-            break;
-        }
-        n++;
-    }
+    while (n % f != 0) n++;
+    cout << setw(2) << setfill('0') << n % 100 << '\n';
 
     return 0;
 }
